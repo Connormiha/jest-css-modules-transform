@@ -1,0 +1,53 @@
+{
+  "name": "jest-css-modules",
+  "description": "Jest's preprocessor for css, sass, less, stylus modules generated with Webpack",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Mikhail Bodrov",
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Connormiha/jest-css-modules.git"
+  },
+  "keywords": [
+    "jest",
+    "webpack",
+    "css-import",
+    "transform",
+    "preprocessor",
+    "class",
+    "classname",
+    "css",
+    "stylus",
+    "sass",
+    "scss",
+    "less",
+    "module",
+    "css-module"
+  ],
+  "scripts": {
+    "coverage": "jest --coverage --config jest.json",
+    "lint": "eslint src",
+    "precommit": "npm run lint && npm test",
+    "prepush": "npm run lint && npm test",
+    "prepare": "npm run lint && npm test",
+    "test": "jest --no-cache --config jest.json"
+  },
+  "peerDependencies": {
+    "stylus": "*",
+    "node-sass": "*",
+    "less": "*"
+  },
+  "devDependencies": {
+    "eslint": "4.7.0",
+    "eslint-plugin-jest": "21.1.0",
+    "husky": "0.14.3",
+    "jest-cli": "21.1.0",
+    "less": "2.7.2",
+    "node-sass": "4.5.3",
+    "stylus": "^0.54.5"
+  }
+}

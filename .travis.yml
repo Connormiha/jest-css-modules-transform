@@ -1,0 +1,13 @@
+dist: trusty
+language: node_js
+
+node_js:
+  - "7"
+
+before_script:
+- npm run types
+- npm run lint
+
+notifications:
+  email:
+    on_success: never
