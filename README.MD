@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Connormiha/jest-css-modules-transform.svg?branch=master)](https://travis-ci.org/Connormiha/jest-css-modules-transform)
+
+# jest-css-modules-transform
 # Preprocessor css modules for Jest test framework
 This preprocessor converts css files in modules like Webpack.
 If we have css files
@@ -21,8 +24,13 @@ In testing you need to mock all css modules to aviod exception. But use pure obj
 In Jest config add option
 ```json
 "transform": {
-  ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules"
+  ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform"
 },
 ```
 
-It supports `pure CSS`, `SCSS`, `SASS`, `STYLUS` and `LESS`.
+It supports `pure CSS`, `SCSS`, `SASS`, `STYLUS` and `LESS`.  
+
+Install
+```
+npm i jest-css-modules-transform
+```
