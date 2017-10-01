@@ -1,5 +1,5 @@
 {
-  "name": "jest-css-modules",
+  "name": "jest-css-modules-transform",
   "description": "Jest's preprocessor for css, sass, less, stylus modules generated with Webpack",
   "version": "1.0.0",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Connormiha/jest-css-modules.git"
+    "url": "git://github.com/Connormiha/jest-css-modules-transform.git"
   },
   "keywords": [
     "jest",
