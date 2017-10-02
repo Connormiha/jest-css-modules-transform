@@ -1,7 +1,7 @@
 {
   "name": "jest-css-modules-transform",
   "description": "Jest's preprocessor for css, sass, less, stylus modules generated with Webpack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "author": "Mikhail Bodrov",
   "engines": {
@@ -35,11 +35,6 @@
     "prepush": "npm run lint && npm test",
     "prepare": "npm run lint && npm test",
     "test": "jest --no-cache --config jest.json"
-  },
-  "peerDependencies": {
-    "stylus": "*",
-    "node-sass": "*",
-    "less": "*"
   },
   "devDependencies": {
     "eslint": "4.7.0",

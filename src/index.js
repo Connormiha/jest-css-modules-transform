@@ -1,5 +1,7 @@
 'use strict';
 
+const pathSep = require('path').sep;
+
 let stylus;
 let sass;
 let less;
@@ -104,7 +106,7 @@ const getCSSSelectors = (css, path) => {
 
 module.exports = {
     process(src, path) {
-        const filename = path.slice(path.lastIndexOf('/') + 1);
+        const filename = path.slice(path.lastIndexOf(pathSep) + 1);
         const extention = filename.slice(filename.lastIndexOf('.') + 1);
         let textCSS = src;
 
