@@ -1,4 +1,4 @@
-## 1.1.2
+## 1.0.3
 Fix "import" directive for less, sass, scss, stylus modules
 
 ## 1.0.2
