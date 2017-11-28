@@ -113,7 +113,7 @@ module.exports = {
         switch (extention) {
             case 'styl':
                 stylus = stylus || require('stylus');
-                stylus.render(src, {filename}, (err, css) => {
+                stylus.render(src, {filename: path}, (err, css) => {
                     if (err) {
                         throw err;
                     }
@@ -125,12 +125,12 @@ module.exports = {
 
             case 'sass': case 'scss':
                 sass = sass || require('node-sass');
-                textCSS = String(sass.renderSync({data: src, file: filename, indentedSyntax: extention === 'sass'}).css);
+                textCSS = String(sass.renderSync({data: src, file: path, indentedSyntax: extention === 'sass'}).css);
                 break;
 
             case 'less':
                 less = less || require('less');
-                less.render(src, {filename}, (err, css) => {
+                less.render(src, {filename: path}, (err, css) => {
                     if (err) {
                         throw err;
                     }
