@@ -30,8 +30,8 @@ const getCSSSelectors = (css, path) => {
             throw Error(`Parse error ${path}`);
         }
 
-        if (css.indexOf('/**', i) === i) {
-            i = css.indexOf('*/', i + 3);
+        if (css.indexOf('/*', i) === i) {
+            i = css.indexOf('*/', i + 2);
             continue;
         }
 
