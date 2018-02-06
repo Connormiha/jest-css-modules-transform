@@ -32,6 +32,12 @@ const getCSSSelectors = (css, path) => {
 
         if (css.indexOf('/*', i) === i) {
             i = css.indexOf('*/', i + 2);
+
+            // Unclosed comment. Break to avoid infinity loop
+            if (i === -1) {
+                break;
+            }
+
             continue;
         }
 

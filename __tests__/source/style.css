@@ -1,8 +1,10 @@
-/**
+/** /**
 .super_hidden_class {
     display: block;
 }
  */
+
+ /**/
 
 @keyframes sunrise {
     0% {
@@ -49,4 +51,9 @@
 input {
     display: block;
     opacity: 0.5;
+}
+
+/*
+.super_hidden_class2 {
+    display: block;
 }

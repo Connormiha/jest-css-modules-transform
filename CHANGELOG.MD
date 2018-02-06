@@ -1,3 +1,6 @@
+## 1.0.4
+Fix parsing css with comments
+
 ## 1.0.3
 Fix "import" directive for less, sass, scss, stylus modules
 
