@@ -56,21 +56,9 @@ const getCSSSelectors = (css, path) => {
             continue;
         }
 
-        if (char === '"') {
+        if (char === '"' || char === '\'') {
             do {
-                i = css.indexOf('"', i + 1);
-                // Syntax error since this line. Don't parse, but save collected result
-                if (i === -1) {
-                    return result;
-                }
-            } while (css[i - 1] === '\\');
-            i++;
-            continue;
-        }
-
-        if (char === '\'') {
-            do {
-                i = css.indexOf('\'', i + 1);
+                i = css.indexOf(char, i + 1);
                 // Syntax error since this line. Don't parse, but save collected result
                 if (i === -1) {
                     return result;
