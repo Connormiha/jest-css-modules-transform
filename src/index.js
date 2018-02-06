@@ -16,7 +16,7 @@ const moduleTemplate = `
     exports.default = %s;
 `;
 
-const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[]/;
+const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
 
 const getCSSSelectors = (css, path) => {
     const end = css.length;
@@ -35,7 +35,8 @@ const getCSSSelectors = (css, path) => {
 
             // Unclosed comment. Break to avoid infinity loop
             if (i === -1) {
-                break;
+                // Don't parse, but save collected result
+                return result;
             }
 
             continue;
@@ -58,6 +59,10 @@ const getCSSSelectors = (css, path) => {
         if (char === '"') {
             do {
                 i = css.indexOf('"', i + 1);
+                // Syntax error since this line. Don't parse, but save collected result
+                if (i === -1) {
+                    return result;
+                }
             } while (css[i - 1] === '\\');
             i++;
             continue;
@@ -66,6 +71,10 @@ const getCSSSelectors = (css, path) => {
         if (char === '\'') {
             do {
                 i = css.indexOf('\'', i + 1);
+                // Syntax error since this line. Don't parse, but save collected result
+                if (i === -1) {
+                    return result;
+                }
             } while (css[i - 1] === '\\');
             i++;
             continue;
@@ -84,6 +93,7 @@ const getCSSSelectors = (css, path) => {
                 i++;
             }
             const word = css.slice(startWord, i);
+
             result[word] = word;
             continue;
         }

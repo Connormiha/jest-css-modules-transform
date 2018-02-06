@@ -1,7 +1,7 @@
 {
   "name": "jest-css-modules-transform",
   "description": "Jest's preprocessor for css, sass, less, stylus modules generated with Webpack",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "author": "Mikhail Bodrov",
   "engines": {
