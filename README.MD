@@ -30,7 +30,30 @@ In Jest config add option
 
 It supports `pure CSS`, `SCSS`, `SASS`, `STYLUS` and `LESS`.  
 
-Install
+### Options
+You can save preproccessor options in file `jest-css-modules-transform-config.js` in root of your project(Where is the file `package.json`).
+You can pass options for your preprocessors.
+##### example:  
+```js
+const path = require('path');  
+const additionalResolvePath = path.resolve(__dirname, 'src', 'additional_modules');
+
+module.exports = {
+    sassConfig: {
+        includePaths: [additionalResolvePath],
+        precision: 5,
+    },
+    lessConfig: {
+        paths: [additionalResolvePath],
+    },
+    stylusConfig: {
+        paths: [additionalResolvePath],
+    },
+};
+```
+For all preprocessor options see offical documentaitions for Sass, Less, Stylus.
+
+### Install
 ```
 npm i jest-css-modules-transform
 ```
