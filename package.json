@@ -37,12 +37,12 @@
     "test": "jest --no-cache --config jest.json"
   },
   "devDependencies": {
-    "eslint": "4.17.0",
-    "eslint-plugin-jest": "21.7.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-jest": "21.15.0",
     "husky": "0.14.3",
-    "jest-cli": "22.1.4",
-    "less": "2.7.3",
-    "node-sass": "4.7.2",
+    "jest-cli": "22.4.3",
+    "less": "3.0.1",
+    "node-sass": "4.8.3",
     "stylus": "^0.54.5"
   }
 }
