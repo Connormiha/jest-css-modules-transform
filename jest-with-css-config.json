@@ -1,6 +1,5 @@
 {
-  "testRegex": "/__tests__/.*\\.spec\\.js$",
-  "testPathIgnorePatterns": ["/node_modules/", "/__tests__/config\\.spec\\.js$"],
+  "testRegex": "/__tests__/config\\.spec\\.js$",
   "transform": {
     ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/src/index.js"
   },

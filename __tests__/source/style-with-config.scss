@@ -1,0 +1,59 @@
+@import "./config/vars.scss";
+@import "additional-constants.scss";
+
+/**
+.super_hidden_class {
+    display: block;
+}
+ */
+
+@keyframes sunrise {
+    0% {
+        bottom: 0;
+        left: 340px;
+        background: $blue;
+    }
+
+    33% {
+        bottom: 340px;
+        left: 340px;
+        background: $yellow;
+    }
+
+    66% {
+        bottom: 340px;/** .hiddenclass15:before{content:".hiddenclass20{display: block}"} /** {}dd*/
+        left: 40px;
+        background: $yellow;
+    }
+
+    100% {
+        bottom: 0;
+        left: 40px;
+        background: $red;
+    }
+
+}
+
+.class1 {
+    display: block;
+    content: ".hiddenclass{display: block;}";
+    color: $gray;
+
+    & label {
+        display: block;
+    }
+}
+
+.class2, .class3 {
+    display: block;
+    color: #fff;
+}
+
+#id, #id2{
+    display: block;
+}
+
+input {
+    display: block;
+    opacity: 0.5;
+}

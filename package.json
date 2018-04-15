@@ -34,7 +34,7 @@
     "precommit": "npm run lint && npm test",
     "prepush": "npm run lint && npm test",
     "prepare": "npm run lint && npm test",
-    "test": "jest --no-cache --config jest.json"
+    "test": "jest --no-cache --config jest.json && jest --no-cache --config jest-with-css-config.json"
   },
   "devDependencies": {
     "eslint": "4.19.1",

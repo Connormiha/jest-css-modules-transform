@@ -1,6 +1,6 @@
 'use strict';
 
-const pathSep = require('path').sep;
+const {sep: pathSep, resolve} = require('path');
 
 let stylus;
 let sass;
@@ -108,16 +108,48 @@ const getCSSSelectors = (css, path) => {
     return result;
 };
 
+const getPreProcessorsConfig = (function wrap() {
+    const preProcessorsConfigDefalut = {
+        sassConfig: {},
+        lessConfig: {},
+        stylusConfig: {},
+    };
+
+    let preProcessorsConfig;
+
+    return (rootDir) => {
+        if (preProcessorsConfig) {
+            return preProcessorsConfig;
+        }
+
+        try {
+            preProcessorsConfig = require(resolve(rootDir, 'jest-css-modules-transform-config.js'));
+        } catch (e) {
+            preProcessorsConfig = preProcessorsConfigDefalut;
+        }
+
+        return preProcessorsConfig;
+    };
+}());
+
 module.exports = {
-    process(src, path) {
+    process(src, path, config) {
+        const preProcessorsConfig = getPreProcessorsConfig(config.rootDir);
         const filename = path.slice(path.lastIndexOf(pathSep) + 1);
         const extention = filename.slice(filename.lastIndexOf('.') + 1);
         let textCSS = src;
+        let sassConfig;
+        let lessConfig;
+        let stylusConfig;
 
         switch (extention) {
             case 'styl':
                 stylus = stylus || require('stylus');
-                stylus.render(src, {filename: path}, (err, css) => {
+                stylusConfig = Object.assign(
+                    preProcessorsConfig.stylusConfig || {},
+                    {filename: path}
+                );
+                stylus.render(src, stylusConfig, (err, css) => {
                     if (err) {
                         throw err;
                     }
@@ -127,14 +159,27 @@ module.exports = {
 
                 break;
 
-            case 'sass': case 'scss':
+            case 'sass':
+            case 'scss':
                 sass = sass || require('node-sass');
-                textCSS = String(sass.renderSync({data: src, file: path, indentedSyntax: extention === 'sass'}).css);
+                sassConfig = Object.assign(
+                    preProcessorsConfig.sassConfig || {},
+                    {
+                        data: src,
+                        file: path,
+                        indentedSyntax: extention === 'sass',
+                    }
+                );
+                textCSS = String(sass.renderSync(sassConfig).css);
                 break;
 
             case 'less':
                 less = less || require('less');
-                less.render(src, {filename: path}, (err, css) => {
+                lessConfig = Object.assign(
+                    preProcessorsConfig.lessConfig || {},
+                    {filename: path}
+                );
+                less.render(src, lessConfig, (err, css) => {
                     if (err) {
                         throw err;
                     }
