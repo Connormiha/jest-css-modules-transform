@@ -1,0 +1,13 @@
+.foo {
+    &__bar {
+        color: red;
+    }
+
+    &__zoo {
+        color: blue;
+    }
+
+    & .boo {
+        color: green;
+    }
+}
