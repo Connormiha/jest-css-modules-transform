@@ -38,11 +38,15 @@
   },
   "devDependencies": {
     "eslint": "4.19.1",
-    "eslint-plugin-jest": "21.15.0",
+    "eslint-plugin-jest": "21.15.1",
     "husky": "0.14.3",
     "jest-cli": "22.4.3",
-    "less": "3.0.1",
-    "node-sass": "4.8.3",
-    "stylus": "^0.54.5"
+    "less": "3.0.2",
+    "node-sass": "4.9.0",
+    "stylus": "0.54.5"
+  },
+  "dependencies": {
+    "postcss": "^6.0.22",
+    "postcss-nested": "^3.0.0"
   }
 }

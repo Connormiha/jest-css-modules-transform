@@ -1,6 +1,8 @@
 'use strict';
 
 const {sep: pathSep, resolve} = require('path');
+const postcss = require('postcss');
+const postcssNested = postcss([require('postcss-nested')]);
 
 let stylus;
 let sass;
@@ -187,6 +189,9 @@ module.exports = {
                     textCSS = css.css;
                 });
 
+                break;
+            case 'css':
+                textCSS = postcssNested.process(src).css;
                 break;
         }
 
