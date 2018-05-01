@@ -1,3 +1,7 @@
+## 2.0.0
+Support nested selectors in pure css via `postcss-nested`.  
+Now invalid pure css throw parse error by `postcss`
+
 ## 1.1.0
 Add optional config file `jest-css-modules-transform-config.js`
 
