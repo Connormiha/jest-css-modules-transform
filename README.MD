@@ -12,7 +12,7 @@ If we have css files
 Webpack will transfrom it to object.
 ```js
 {
-    class1: 'class1',//value may be different. It depends of localIndentName property
+    class1: 'class1', //value may be different. It depends of localIndentName property
     class2: 'class2',
     class3: 'class3',
 }
@@ -51,7 +51,7 @@ module.exports = {
     },
 };
 ```
-For all preprocessor options see offical documentaitions for Sass, Less, Stylus.
+For all preprocessor options see offical documentations for Sass, Less, Stylus.
 
 ### Install
 ```
