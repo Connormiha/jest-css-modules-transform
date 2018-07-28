@@ -32,7 +32,7 @@ It supports `pure CSS`, `SCSS`, `SASS`, `STYLUS` and `LESS`.
 
 ### Options
 You can save preproccessor options in file `jest-css-modules-transform-config.js` in root of your project(Where is the file `package.json`).
-You can pass options for your preprocessors.
+You can pass options for your preprocessors or override the default `moduleTemplate`.
 ##### example:  
 ```js
 const path = require('path');  
@@ -49,6 +49,7 @@ module.exports = {
     stylusConfig: {
         paths: [additionalResolvePath],
     },
+    moduleTemplate = 'module.exports = %s'
 };
 ```
 For all preprocessor options see offical documentations for Sass, Less, Stylus.

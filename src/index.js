@@ -111,7 +111,7 @@ const getCSSSelectors = (css, path) => {
 };
 
 const getPreProcessorsConfig = (function wrap() {
-    const preProcessorsConfigDefalut = {
+    const preProcessorsConfigDefault = {
         sassConfig: {},
         lessConfig: {},
         stylusConfig: {},
@@ -127,7 +127,7 @@ const getPreProcessorsConfig = (function wrap() {
         try {
             preProcessorsConfig = require(resolve(rootDir, 'jest-css-modules-transform-config.js'));
         } catch (e) {
-            preProcessorsConfig = preProcessorsConfigDefalut;
+            preProcessorsConfig = preProcessorsConfigDefault;
         }
 
         return preProcessorsConfig;
@@ -195,6 +195,7 @@ module.exports = {
                 break;
         }
 
-        return moduleTemplate.replace('%s', JSON.stringify(getCSSSelectors(textCSS, path)));
+        return (preProcessorsConfig.moduleTemplate || moduleTemplate)
+            .replace('%s', JSON.stringify(getCSSSelectors(textCSS, path)));
     },
 };
