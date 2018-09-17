@@ -1,3 +1,6 @@
+## 2.0.1
+Add support `.pcss`, `.postcss` extentions
+
 ## 2.0.0
 Support nested selectors in pure css via `postcss-nested`.  
 Now invalid pure css throw parse error by `postcss`
