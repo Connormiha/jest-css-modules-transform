@@ -50,10 +50,12 @@ rules:
   func-style: off
   no-process-env: off
   no-param-reassign: off
+  max-lines-per-function: off
   global-require: off
   require-jsdoc: off
   no-prototype-builtins: off
   no-continue: off
+  require-unicode-regexp: off
   max-params:
   - error
   - 5
