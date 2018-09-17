@@ -1,3 +1,6 @@
+## 2.0.2
+Use postcss v7
+
 ## 2.0.1
 Add support `.pcss`, `.postcss` extentions
 
