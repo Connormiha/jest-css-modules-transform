@@ -191,6 +191,8 @@ module.exports = {
 
                 break;
             case 'css':
+            case 'pcss':
+            case 'postcss':
                 textCSS = postcssNested.process(src).css;
                 break;
         }
