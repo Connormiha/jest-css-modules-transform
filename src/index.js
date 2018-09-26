@@ -26,6 +26,7 @@ const getCSSSelectors = (css, path) => {
     let char;
     let bracketsCount = 0;
     const result = {};
+    const resultAnimations = {};
 
     while (i < end) {
         if (i === -1) {
@@ -100,14 +101,14 @@ const getCSSSelectors = (css, path) => {
             }
 
             const word = css.slice(startWord, i);
-            result[word] = word;
+            resultAnimations[word] = word;
             continue;
         }
 
         i++;
     }
 
-    return result;
+    return Object.assign(result, resultAnimations);
 };
 
 const getPreProcessorsConfig = (function wrap() {

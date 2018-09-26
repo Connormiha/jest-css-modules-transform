@@ -1,3 +1,6 @@
+## 2.0.3
+Use dict keys order like Webpack
+
 ## 2.0.2
 Use postcss v7
 

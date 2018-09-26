@@ -45,6 +45,7 @@ rules:
   max-statements: off
   no-ternary: off
   init-declarations: off
+  array-element-newline: off
   valid-jsdoc: off
   no-sync: off
   func-style: off
