@@ -29,17 +29,19 @@
     "css-module"
   ],
   "scripts": {
-    "coverage": "jest --coverage --config jest.json",
+    "coverage": "jest --coverage",
     "lint": "eslint src",
-    "precommit": "npm run lint && npm test",
-    "prepush": "npm run lint && npm test",
     "prepare": "npm run lint && npm test",
-    "test": "jest --no-cache --config jest.json && jest --no-cache --config jest-with-css-config.json"
+    "test": "npm run test:base && npm run test:config && npm run test:sassrc",
+    "test:base": "jest --no-cache ",
+    "test:config": "jest --no-cache --config jest-with-css-config.js ",
+    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js ",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --no-cache --config jest-with-css-config.js"
   },
   "devDependencies": {
-    "eslint": "5.6.0",
-    "eslint-plugin-jest": "21.22.1",
-    "husky": "0.14.3",
+    "eslint": "5.6.1",
+    "eslint-plugin-jest": "21.24.1",
+    "husky": "1.1.1",
     "jest-cli": "23.6.0",
     "less": "3.8.1",
     "node-sass": "4.9.3",
@@ -48,5 +50,11 @@
   "dependencies": {
     "postcss": "^7.0.2",
     "postcss-nested": "^4.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
+    }
   }
 }

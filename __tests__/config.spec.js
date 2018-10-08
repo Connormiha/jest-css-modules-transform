@@ -4,6 +4,7 @@ const path = require('path');
 
 describe('config', () => {
     const configPath = path.resolve(__dirname, '..', 'jest-css-modules-transform-config.js');
+
     beforeAll(() => {
         fs.writeFileSync(
             configPath,

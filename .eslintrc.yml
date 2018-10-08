@@ -56,6 +56,7 @@ rules:
   require-jsdoc: off
   no-prototype-builtins: off
   no-continue: off
+  no-undefined: off
   require-unicode-regexp: off
   max-params:
   - error
