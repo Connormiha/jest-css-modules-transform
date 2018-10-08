@@ -1,3 +1,6 @@
+## 2.1.0
+Allow sassrc.js
+
 ## 2.0.3
 Use dict keys order like Webpack
 
