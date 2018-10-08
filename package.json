@@ -35,8 +35,7 @@
     "test": "npm run test:base && npm run test:config && npm run test:sassrc",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js ",
-    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js ",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --no-cache --config jest-with-css-config.js"
+    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js "
   },
   "devDependencies": {
     "eslint": "5.6.1",
