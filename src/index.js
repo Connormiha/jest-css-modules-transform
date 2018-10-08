@@ -135,9 +135,22 @@ const getPreProcessorsConfig = (function wrap() {
     };
 }());
 
+const getGlobalSassData = (rootDir) => {
+    let sassrc;
+
+    try {
+        sassrc = require(resolve(rootDir, '.sassrc.js'));
+    } catch (e) {
+        sassrc = { data: '' };
+    }
+    
+    return sassrc.data || '';
+};
+
 module.exports = {
     process(src, path, config) {
         const preProcessorsConfig = getPreProcessorsConfig(config.rootDir);
+        const globalSassData = getGlobalSassData(config.rootDir);
         const filename = path.slice(path.lastIndexOf(pathSep) + 1);
         const extention = filename.slice(filename.lastIndexOf('.') + 1);
         let textCSS = src;
@@ -168,7 +181,7 @@ module.exports = {
                 sassConfig = Object.assign(
                     preProcessorsConfig.sassConfig || {},
                     {
-                        data: src,
+                        data: globalSassData + src,
                         file: path,
                         indentedSyntax: extention === 'sass',
                     }
