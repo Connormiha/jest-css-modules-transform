@@ -135,6 +135,14 @@ const getPreProcessorsConfig = (function wrap() {
     };
 }());
 
+const getGlobalSassData = (rootDir) => {
+    try {
+        return require(resolve(rootDir, '.sassrc.js')).data || '';
+    } catch (e) {
+        return '';
+    }
+};
+
 module.exports = {
     process(src, path, config) {
         const preProcessorsConfig = getPreProcessorsConfig(config.rootDir);
@@ -144,6 +152,7 @@ module.exports = {
         let sassConfig;
         let lessConfig;
         let stylusConfig;
+        let globalSassData;
 
         switch (extention) {
             case 'styl':
@@ -165,10 +174,11 @@ module.exports = {
             case 'sass':
             case 'scss':
                 sass = sass || require('node-sass');
+                globalSassData = getGlobalSassData(config.rootDir);
                 sassConfig = Object.assign(
                     preProcessorsConfig.sassConfig || {},
                     {
-                        data: src,
+                        data: globalSassData + src,
                         file: path,
                         indentedSyntax: extention === 'sass',
                     }
