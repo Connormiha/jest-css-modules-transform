@@ -1,3 +1,6 @@
+## 2.1.1
+Add postcss config support
+
 ## 2.1.0
 Allow sassrc.js
 
