@@ -3,6 +3,7 @@
 const {sep: pathSep, resolve} = require('path');
 const postcss = require('postcss');
 const postcssNested = postcss([require('postcss-nested')]);
+let postcssConfig = null;
 
 let stylus;
 let sass;
@@ -145,6 +146,14 @@ const getGlobalSassData = (rootDir) => {
     }
 };
 
+const requirePostcssConfig = (rootDir) => {
+    try {
+        return `${require(resolve(rootDir, 'postcss.config.js')).data}`;
+    } catch (e) {
+        return null;
+    }
+};
+
 module.exports = {
     process(src, path, config) {
         const preProcessorsConfig = getPreProcessorsConfig(config.rootDir);
@@ -205,7 +214,8 @@ module.exports = {
             case 'css':
             case 'pcss':
             case 'postcss':
-                textCSS = postcssNested.process(src).css;
+                postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(config.rootDir) || postcssNested;
+                textCSS = postcssConfig.process(src).css;
                 break;
         }
 

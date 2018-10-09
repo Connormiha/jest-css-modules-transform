@@ -49,6 +49,13 @@ module.exports = {
     stylusConfig: {
         paths: [additionalResolvePath],
     },
+    postcssConfig: {
+        plugins: [
+            require('autoprefixer')({
+                browsers: ['Chrome 68', 'Firefox 62', 'Safari 12']
+            })
+        ]
+    },
 };
 ```
 For all preprocessor options see offical documentations for Sass, Less, Stylus.
