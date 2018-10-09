@@ -148,7 +148,7 @@ const getGlobalSassData = (rootDir) => {
 
 const requirePostcssConfig = (rootDir) => {
     try {
-        return `${require(resolve(rootDir, 'postcss.config.js')).data}`;
+        return require(resolve(rootDir, 'postcss.config.js'));
     } catch (e) {
         return null;
     }
@@ -214,8 +214,8 @@ module.exports = {
             case 'css':
             case 'pcss':
             case 'postcss':
-                postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(config.rootDir) || postcssNested;
-                textCSS = postcssConfig.process(src).css;
+                postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(config.rootDir);
+                textCSS = postcssConfig ? postcss(postcssConfig).process(src).css : postcssNested.process(src).css;
                 break;
         }
 
