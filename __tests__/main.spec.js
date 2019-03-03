@@ -15,7 +15,7 @@ describe('jest-css-modules', () => {
         ['less', lessFile],
     ].forEach(([ext, style]) => {
         it(`should import .${ext}`, () => {
-            expect(style).toEqual(cssFileExpect);
+            expect({...style}).toEqual(cssFileExpect);
         });
 
         it(`should import .${ext} and keyframes should be last`, () => {
@@ -28,7 +28,7 @@ describe('jest-css-modules', () => {
     });
 
     it('should import .css with nested', () => {
-        expect(cssNestedFile).toEqual({
+        expect({...cssNestedFile}).toEqual({
             foo: 'foo',
             foo__bar: 'foo__bar',
             foo__zoo: 'foo__zoo',

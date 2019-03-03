@@ -9,14 +9,24 @@ let stylus;
 let sass;
 let less;
 
-const moduleTemplate = `
+const moduleTemplate = ({selectors, path}) => `
     "use strict";
 
     Object.defineProperty(exports, "__esModule", {
-       value: true
+        value: true
     });
 
-    exports.default = %s;
+    const data = new Proxy(${selectors}, {
+        get: function(obj, prop) {
+            if (prop in obj) {
+                return obj[prop];
+            } else {
+                throw new Error(\`${path} has no exported member \${String(prop)}\`);
+            }
+        }
+    })
+
+    exports.default = data;
 `;
 
 const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
@@ -219,6 +229,9 @@ module.exports = {
                 break;
         }
 
-        return moduleTemplate.replace('%s', JSON.stringify(getCSSSelectors(textCSS, path)));
+        return moduleTemplate({
+            selectors: JSON.stringify(getCSSSelectors(textCSS, path)),
+            path,
+        });
     },
 };

@@ -18,21 +18,21 @@ describe('config', () => {
 
     it('should import .sass', () => {
         const sassFile = require('./source/style-with-config.sass').default;
-        expect(sassFile).toEqual(cssFileExpect);
+        expect({...sassFile}).toEqual(cssFileExpect);
     });
 
     it('should import .scss', () => {
         const scssFile = require('./source/style-with-config.scss').default;
-        expect(scssFile).toEqual(cssFileExpect);
+        expect({...scssFile}).toEqual(cssFileExpect);
     });
 
     it('should import .less', () => {
         const lessFile = require('./source/style-with-config.less').default;
-        expect(lessFile).toEqual(cssFileExpect);
+        expect({...lessFile}).toEqual(cssFileExpect);
     });
 
     it('should import .styl', () => {
         const stulysFile = require('./source/style-with-config.styl').default;
-        expect(stulysFile).toEqual(cssFileExpect);
+        expect({...stulysFile}).toEqual(cssFileExpect);
     });
 });
