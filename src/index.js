@@ -11,12 +11,14 @@ let less;
 
 const moduleTemplate = `
     "use strict";
-
     Object.defineProperty(exports, "__esModule", {
        value: true
     });
-
-    exports.default = %s;
+    const data = %s;
+    exports.default = data;
+    if (typeof module === 'object' && module) {
+         module.exports = data;
+    }
 `;
 
 const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
