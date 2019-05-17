@@ -4,5 +4,9 @@
 .eslintrc.yml
 jest.json
 package-lock.json
+jest.config.ts
+jest-with-css-config.js
+jest-with-sassrc.js
+tsconfig.json
 __tests__
 coverage
