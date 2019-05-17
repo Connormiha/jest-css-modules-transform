@@ -11,13 +11,34 @@ let less;
 
 const moduleTemplate = `
     "use strict";
-    Object.defineProperty(exports, "__esModule", {
-       value: true
-    });
+
     const data = %s;
-    exports.default = data;
+
     if (typeof module === 'object' && module) {
-         module.exports = data;
+        Object.defineProperty(data, "__esModule", {
+            value: true
+        });
+        module.exports = new Proxy(data, {
+            enumerate(target) {
+                return Reflect.enumerate(target);
+            },
+            
+            get(target, attr) {
+                if (attr === 'default') {
+                    return target;
+                };
+                return target[attr];
+            },
+
+            getPrototypeOf() {
+                return Object;
+            }
+        });
+    } else {
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.default = data;
     }
 `;
 

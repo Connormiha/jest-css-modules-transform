@@ -1,11 +1,10 @@
-const cssFile = require('./source/style.css').default;
-const stylusFile = require('./source/style.styl').default;
-const sassFile = require('./source/style.sass').default;
-const scssFile = require('./source/style.scss').default;
-const lessFile = require('./source/style.less').default;
-const cssNestedFile = require('./source/style-nested.css').default;
-const cssFileExpect = require('./source/expected');
-expect(Object.keys(cssFile).slice(-1)[0]).toBe('sunrise');
+const cssFile = require('./source/style.css');
+const stylusFile = require('./source/style.styl');
+const sassFile = require('./source/style.sass');
+const scssFile = require('./source/style.scss');
+const lessFile = require('./source/style.less');
+const cssNestedFile = require('./source/style-nested.css');
+
 describe('jest-css-modules', () => {
     [
         ['css', cssFile],
@@ -15,7 +14,7 @@ describe('jest-css-modules', () => {
         ['less', lessFile],
     ].forEach(([ext, style]) => {
         it(`should import .${ext}`, () => {
-            expect(style).toEqual(cssFileExpect);
+            expect(style).toMatchSnapshot();
         });
 
         it(`should import .${ext} and keyframes should be last`, () => {
@@ -34,5 +33,11 @@ describe('jest-css-modules', () => {
             foo__zoo: 'foo__zoo',
             boo: 'boo',
         });
+    });
+
+    it('should have correct object params', () => {
+        expect(typeof cssFile).toBe('object');
+        expect(cssFile).toBeInstanceOf(Object);
+        expect(Object.keys(cssFile)).toMatchSnapshot();
     });
 });

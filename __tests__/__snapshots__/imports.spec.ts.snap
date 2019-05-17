@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Imports should import all 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`Imports should import default 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;

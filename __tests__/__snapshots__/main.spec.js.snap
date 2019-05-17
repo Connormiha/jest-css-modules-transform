@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest-css-modules should have correct object params 1`] = `
+Array [
+  "class1",
+  "class2",
+  "class3",
+  "id",
+  "id2",
+  "sunrise",
+]
+`;
+
+exports[`jest-css-modules should import .css 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`jest-css-modules should import .less 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`jest-css-modules should import .sass 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`jest-css-modules should import .scss 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`jest-css-modules should import .styl 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;

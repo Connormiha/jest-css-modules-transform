@@ -1,4 +1,3 @@
-const cssFileExpect = require('./source/expected');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,22 +16,22 @@ describe('config', () => {
     });
 
     it('should import .sass', () => {
-        const sassFile = require('./source/style-with-config.sass').default;
-        expect(sassFile).toEqual(cssFileExpect);
+        const sassFile = require('./source/style-with-config.sass');
+        expect(sassFile).toMatchSnapshot();
     });
 
     it('should import .scss', () => {
-        const scssFile = require('./source/style-with-config.scss').default;
-        expect(scssFile).toEqual(cssFileExpect);
+        const scssFile = require('./source/style-with-config.scss');
+        expect(scssFile).toMatchSnapshot();
     });
 
     it('should import .less', () => {
-        const lessFile = require('./source/style-with-config.less').default;
-        expect(lessFile).toEqual(cssFileExpect);
+        const lessFile = require('./source/style-with-config.less');
+        expect(lessFile).toMatchSnapshot();
     });
 
     it('should import .styl', () => {
-        const stulysFile = require('./source/style-with-config.styl').default;
-        expect(stulysFile).toEqual(cssFileExpect);
+        const stulysFile = require('./source/style-with-config.styl');
+        expect(stulysFile).toMatchSnapshot();
     });
 });

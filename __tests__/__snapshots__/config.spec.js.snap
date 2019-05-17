@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`config should import .less 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`config should import .sass 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`config should import .scss 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;
+
+exports[`config should import .styl 1`] = `
+Object {
+  "class1": "class1",
+  "class2": "class2",
+  "class3": "class3",
+  "id": "id",
+  "id2": "id2",
+  "sunrise": "sunrise",
+}
+`;

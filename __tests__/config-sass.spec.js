@@ -16,7 +16,7 @@ describe('config sassrc', () => {
     });
 
     it('should import .sass with .sassrc', () => {
-        const sassFile = require('./source/style-with-sassrc.sass').default;
+        const sassFile = require('./source/style-with-sassrc.sass');
         expect(sassFile).toEqual({class: 'class', bar: 'bar'});
     });
 });
