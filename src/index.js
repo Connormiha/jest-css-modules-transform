@@ -4,6 +4,7 @@ const {sep: pathSep, resolve} = require('path');
 const postcss = require('postcss');
 const postcssNested = postcss([require('postcss-nested')]);
 let postcssConfig = null;
+let postcssPluginWithConfig = null;
 
 let stylus;
 let sass;
@@ -19,10 +20,6 @@ const moduleTemplate = `
             value: true
         });
         module.exports = new Proxy(data, {
-            enumerate(target) {
-                return Reflect.enumerate(target);
-            },
-            
             get(target, attr) {
                 if (attr === 'default') {
                     return target;
@@ -238,7 +235,10 @@ module.exports = {
             case 'pcss':
             case 'postcss':
                 postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(config.rootDir);
-                textCSS = postcssConfig ? postcss(postcssConfig).process(src).css : postcssNested.process(src).css;
+                if (postcssConfig) {
+                    postcssPluginWithConfig = postcssPluginWithConfig || postcss(postcssConfig);
+                }
+                textCSS = postcssConfig ? postcssPluginWithConfig.process(src).css : postcssNested.process(src).css;
                 break;
         }
 
