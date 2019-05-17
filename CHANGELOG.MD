@@ -1,3 +1,6 @@
+## 2.2.0
+Add compibility for some kind of imports
+
 ## 2.1.1
 Add postcss config support
 
