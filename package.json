@@ -32,24 +32,26 @@
     "coverage": "jest --coverage",
     "lint": "eslint src",
     "prepare": "npm run lint && npm test",
-    "test": "npm run test:base && npm run test:config && npm run test:sassrc",
+    "test": "npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js ",
-    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js "
+    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js ",
+    "test:camel-case": "jest --no-cache --config jest-with-camel-case.js "
   },
   "devDependencies": {
-    "@types/jest": "24.0.12",
-    "@types/node": "12.0.0",
+    "@types/jest": "24.0.13",
+    "@types/node": "12.0.4",
     "eslint": "5.16.0",
-    "eslint-plugin-jest": "22.5.1",
+    "eslint-plugin-jest": "22.6.4",
     "husky": "2.3.0",
     "jest-cli": "24.8.0",
     "less": "3.9.0",
     "node-sass": "4.12.0",
     "stylus": "0.54.5",
-    "typescript": "3.4.5"
+    "typescript": "3.5.1"
   },
   "dependencies": {
+    "lodash": "^4.0.0",
     "postcss": "^7.0.16",
     "postcss-nested": "^4.1.2"
   },

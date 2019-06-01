@@ -3,6 +3,7 @@
 const {sep: pathSep, resolve} = require('path');
 const postcss = require('postcss');
 const postcssNested = postcss([require('postcss-nested')]);
+const {camelCase, snakeCase} = require('lodash');
 let postcssConfig = null;
 let postcssPluginWithConfig = null;
 
@@ -39,7 +40,53 @@ const moduleTemplate = `
     }
 `;
 
+let preProcessorsConfig;
+const getPreProcessorsConfig = (function wrap() {
+    const preProcessorsConfigDefalut = {
+        sassConfig: {},
+        lessConfig: {},
+        stylusConfig: {},
+    };
+
+    return (rootDir) => {
+        if (preProcessorsConfig) {
+            return preProcessorsConfig;
+        }
+
+        try {
+            return require(resolve(rootDir, 'jest-css-modules-transform-config.js'));
+        } catch (e) {
+            return preProcessorsConfigDefalut;
+        }
+    };
+}());
+
 const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
+
+const pushToResult = (result, className) => {
+    switch (preProcessorsConfig.exportLocalsStyle) {
+        case 'camelCase':
+            result[className] = className;
+            result[camelCase(className)] = className;
+            break;
+
+        case 'camelCaseOnly':
+            result[camelCase(className)] = className;
+            break;
+
+        case 'dashes':
+            result[className] = className;
+            result[snakeCase(className).replace(/_/g, '-')] = className;
+            break;
+
+        case 'dashesOnly':
+            result[snakeCase(className).replace(/_/g, '-')] = className;
+            break;
+
+        default:
+            result[className] = className;
+    }
+};
 
 const getCSSSelectors = (css, path) => {
     const end = css.length;
@@ -106,7 +153,7 @@ const getCSSSelectors = (css, path) => {
             }
             const word = css.slice(startWord, i);
 
-            result[word] = word;
+            pushToResult(result, word);
             continue;
         }
 
@@ -122,7 +169,7 @@ const getCSSSelectors = (css, path) => {
             }
 
             const word = css.slice(startWord, i);
-            resultAnimations[word] = word;
+            pushToResult(resultAnimations, word);
             continue;
         }
 
@@ -131,30 +178,6 @@ const getCSSSelectors = (css, path) => {
 
     return Object.assign(result, resultAnimations);
 };
-
-const getPreProcessorsConfig = (function wrap() {
-    const preProcessorsConfigDefalut = {
-        sassConfig: {},
-        lessConfig: {},
-        stylusConfig: {},
-    };
-
-    let preProcessorsConfig;
-
-    return (rootDir) => {
-        if (preProcessorsConfig) {
-            return preProcessorsConfig;
-        }
-
-        try {
-            preProcessorsConfig = require(resolve(rootDir, 'jest-css-modules-transform-config.js'));
-        } catch (e) {
-            preProcessorsConfig = preProcessorsConfigDefalut;
-        }
-
-        return preProcessorsConfig;
-    };
-}());
 
 let globalSassData;
 
@@ -174,13 +197,30 @@ const requirePostcssConfig = (rootDir) => {
     }
 };
 
+const getFileExtension = (path) => {
+    const filename = path.slice(path.lastIndexOf(pathSep) + 1);
+    return filename.slice(filename.lastIndexOf('.') + 1);
+};
+
+const getSassContent = (src, path, extention, rootDir) => {
+    sass = sass || require('node-sass');
+    globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
+    const sassConfig = Object.assign(
+        preProcessorsConfig.sassConfig || {},
+        {
+            data: globalSassData + src,
+            file: path,
+            indentedSyntax: extention === 'sass',
+        }
+    );
+    return String(sass.renderSync(sassConfig).css);
+};
+
 module.exports = {
     process(src, path, config) {
-        const preProcessorsConfig = getPreProcessorsConfig(config.rootDir);
-        const filename = path.slice(path.lastIndexOf(pathSep) + 1);
-        const extention = filename.slice(filename.lastIndexOf('.') + 1);
+        preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(config.rootDir);
+        const extention = getFileExtension(path);
         let textCSS = src;
-        let sassConfig;
         let lessConfig;
         let stylusConfig;
 
@@ -203,17 +243,7 @@ module.exports = {
 
             case 'sass':
             case 'scss':
-                sass = sass || require('node-sass');
-                globalSassData = globalSassData === undefined ? getGlobalSassData(config.rootDir) : globalSassData;
-                sassConfig = Object.assign(
-                    preProcessorsConfig.sassConfig || {},
-                    {
-                        data: globalSassData + src,
-                        file: path,
-                        indentedSyntax: extention === 'sass',
-                    }
-                );
-                textCSS = String(sass.renderSync(sassConfig).css);
+                textCSS = getSassContent(src, path, extention, config.rootDir);
                 break;
 
             case 'less':
