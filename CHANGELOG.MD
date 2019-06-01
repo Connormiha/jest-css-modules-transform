@@ -1,3 +1,6 @@
+## 2.3.0
+Add property `exportLocalsStyle` (equivalent from [css-loader]((https://github.com/webpack-contrib/css-loader#exportlocalsstyle)))
+
 ## 2.2.0
 Add compibility for some kind of imports
 

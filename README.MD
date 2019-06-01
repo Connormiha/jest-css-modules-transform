@@ -60,6 +60,32 @@ module.exports = {
 ```
 For all preprocessor options see offical documentations for Sass, Less, Stylus.
 
+#### cssLoaderConfig
+##### exportLocalsStyle
+Webpack's cssLoader has option [exportLocalsStyle](https://github.com/webpack-contrib/css-loader#exportlocalsstyle).
+```js
+// file jest-css-modules-transform-config.js
+module.exports = {
+   cssLoaderConfig: {
+        exportLocalsStyle: 'camelCase'
+   }
+};
+```
+then this css code
+```css
+    .foo__bar{color: red;}
+    .foo__bar2{color: red;}
+```
+converted to
+```js
+    {
+        foo__bar: 'foo__bar',
+        fooBar: 'foo__bar',
+        foo__bar2: 'foo__bar2',
+        fooBar: 'foo__bar2',
+    }
+```
+Availibale values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
 ### Install
 ```
 npm i jest-css-modules-transform
