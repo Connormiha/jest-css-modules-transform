@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest-css-modules with dashes should have correct object params 1`] = `
+Array [
+  "foo__bar",
+  "foo-bar",
+  "foo__zoo",
+  "foo-zoo",
+  "foo",
+  "boo",
+]
+`;

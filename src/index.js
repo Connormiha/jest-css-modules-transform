@@ -46,6 +46,7 @@ const getPreProcessorsConfig = (function wrap() {
         sassConfig: {},
         lessConfig: {},
         stylusConfig: {},
+        cssLoaderConfig: {},
     };
 
     return (rootDir) => {
@@ -64,7 +65,9 @@ const getPreProcessorsConfig = (function wrap() {
 const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
 
 const pushToResult = (result, className) => {
-    switch (preProcessorsConfig.exportLocalsStyle) {
+    const {cssLoaderConfig} = preProcessorsConfig;
+
+    switch ((cssLoaderConfig || {}).exportLocalsStyle) {
         case 'camelCase':
             result[className] = className;
             result[camelCase(className)] = className;

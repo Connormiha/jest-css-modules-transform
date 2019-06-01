@@ -32,11 +32,12 @@
     "coverage": "jest --coverage",
     "lint": "eslint src",
     "prepare": "npm run lint && npm test",
-    "test": "npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case",
+    "test": "npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js ",
-    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js ",
-    "test:camel-case": "jest --no-cache --config jest-with-camel-case.js "
+    "test:sassrc": "jest --no-cache --config jest-with-sassrc.js",
+    "test:camel-case": "jest --no-cache --config jest-with-camel-case.js",
+    "test:dashes": "jest --no-cache --config jest-with-dashes.js"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",
