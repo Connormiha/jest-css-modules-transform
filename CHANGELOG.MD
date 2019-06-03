@@ -1,3 +1,6 @@
+## 2.4.0
+Add support for custom path for plugin's config path
+
 ## 2.3.0
 Add property `exportLocalsStyle` (equivalent from [css-loader]((https://github.com/webpack-contrib/css-loader#exportlocalsstyle)))
 

@@ -86,6 +86,16 @@ converted to
     }
 ```
 Availibale values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
+
+#### Custom config path
+By default option plugin's config file is `jest-css-modules-transform-config.js` from root. For specify custom path just add env `JEST_CSS_MODULES_TRANSFORM_CONFIG`. For example:
+```bash
+JEST_CSS_MODULES_TRANSFORM_CONFIG=custom-config-path npm test
+```
+or
+```bash
+JEST_CSS_MODULES_TRANSFORM_CONFIG=custom-config-path yarn test
+```
 ### Install
 ```
 npm i jest-css-modules-transform
