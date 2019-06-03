@@ -5,6 +5,7 @@ module.exports = {
         '/__tests__/config\\.spec\\.js$',
         '/__tests__/config-sass\\.spec\\.js$',
         '/__tests__/with-camel-case\\.spec\\.js$',
+        '/__tests__/with-camel-case-only\\.spec\\.js$',
         '/__tests__/with-dashes\\.spec\\.js$',
     ],
     transform: {

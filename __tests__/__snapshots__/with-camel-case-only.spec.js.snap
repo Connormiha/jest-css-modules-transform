@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest-css-modules with camelCaseOnly should have correct object params 1`] = `
+Array [
+  "fooBar",
+  "fooZoo",
+  "foo",
+  "boo",
+]
+`;

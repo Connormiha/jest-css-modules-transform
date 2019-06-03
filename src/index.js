@@ -4,6 +4,7 @@ const {sep: pathSep, resolve} = require('path');
 const postcss = require('postcss');
 const postcssNested = postcss([require('postcss-nested')]);
 const {camelCase, snakeCase} = require('lodash');
+const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
 let postcssConfig = null;
 let postcssPluginWithConfig = null;
 
@@ -55,7 +56,7 @@ const getPreProcessorsConfig = (function wrap() {
         }
 
         try {
-            return require(resolve(rootDir, 'jest-css-modules-transform-config.js'));
+            return require(resolve(rootDir, CONFIG_PATH));
         } catch (e) {
             return preProcessorsConfigDefalut;
         }
