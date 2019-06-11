@@ -53,6 +53,11 @@ input {
     opacity: 0.5;
 }
 
+:export {
+    red: #db2b21;
+    type: "global";
+}
+
 /*
 .super_hidden_class2 {
     display: block;

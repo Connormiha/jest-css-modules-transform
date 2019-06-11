@@ -57,6 +57,7 @@ rules:
   no-prototype-builtins: off
   no-continue: off
   no-undefined: off
+  no-underscore-dangle: off
   require-unicode-regexp: off
   max-params:
   - error

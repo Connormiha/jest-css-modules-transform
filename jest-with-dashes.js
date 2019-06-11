@@ -1,5 +1,5 @@
 module.exports = {
-    testRegex: '/__tests__/with-camel-case\\.spec\\.js$',
+    testRegex: '/__tests__/with-dashes\\.spec\\.js$',
     transform: {
         '.+\\.css$': '<rootDir>/src/index.js',
     },

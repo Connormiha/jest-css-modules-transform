@@ -53,6 +53,7 @@
     "typescript": "3.5.1"
   },
   "dependencies": {
+    "icss-utils": "^4.1.1",
     "lodash": "^4.0.0",
     "postcss": "^7.0.16",
     "postcss-nested": "^4.1.2"

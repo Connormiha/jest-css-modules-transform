@@ -3,7 +3,7 @@
 const {sep: pathSep, resolve} = require('path');
 const postcss = require('postcss');
 const postcssNested = postcss([require('postcss-nested')]);
-const {camelCase, snakeCase} = require('lodash');
+const Parser = require('./parser');
 const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
 let postcssConfig = null;
 let postcssPluginWithConfig = null;
@@ -63,126 +63,6 @@ const getPreProcessorsConfig = (function wrap() {
     };
 }());
 
-const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
-
-const pushToResult = (result, className) => {
-    const {cssLoaderConfig} = preProcessorsConfig;
-
-    switch ((cssLoaderConfig || {}).exportLocalsStyle) {
-        case 'camelCase':
-            result[className] = className;
-            result[camelCase(className)] = className;
-            break;
-
-        case 'camelCaseOnly':
-            result[camelCase(className)] = className;
-            break;
-
-        case 'dashes':
-            result[className] = className;
-            result[snakeCase(className).replace(/_/g, '-')] = className;
-            break;
-
-        case 'dashesOnly':
-            result[snakeCase(className).replace(/_/g, '-')] = className;
-            break;
-
-        default:
-            result[className] = className;
-    }
-};
-
-const getCSSSelectors = (css, path) => {
-    const end = css.length;
-    let i = 0;
-    let char;
-    let bracketsCount = 0;
-    const result = {};
-    const resultAnimations = {};
-
-    while (i < end) {
-        if (i === -1) {
-            throw Error(`Parse error ${path}`);
-        }
-
-        if (css.indexOf('/*', i) === i) {
-            i = css.indexOf('*/', i + 2);
-
-            // Unclosed comment. Break to avoid infinity loop
-            if (i === -1) {
-                // Don't parse, but save collected result
-                return result;
-            }
-
-            continue;
-        }
-
-        char = css[i];
-
-        if (char === '{') {
-            bracketsCount++;
-            i++;
-            continue;
-        }
-
-        if (char === '}') {
-            bracketsCount--;
-            i++;
-            continue;
-        }
-
-        if (char === '"' || char === '\'') {
-            do {
-                i = css.indexOf(char, i + 1);
-                // Syntax error since this line. Don't parse, but save collected result
-                if (i === -1) {
-                    return result;
-                }
-            } while (css[i - 1] === '\\');
-            i++;
-            continue;
-        }
-
-        if (bracketsCount > 0) {
-            i++;
-            continue;
-        }
-
-        if (char === '.' || char === '#') {
-            i++;
-            const startWord = i;
-
-            while (!REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                i++;
-            }
-            const word = css.slice(startWord, i);
-
-            pushToResult(result, word);
-            continue;
-        }
-
-        if (css.indexOf('@keyframes', i) === i) {
-            i += 10;
-            while (REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                i++;
-            }
-
-            const startWord = i;
-            while (!REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                i++;
-            }
-
-            const word = css.slice(startWord, i);
-            pushToResult(resultAnimations, word);
-            continue;
-        }
-
-        i++;
-    }
-
-    return Object.assign(result, resultAnimations);
-};
-
 let globalSassData;
 
 const getGlobalSassData = (rootDir) => {
@@ -220,9 +100,12 @@ const getSassContent = (src, path, extention, rootDir) => {
     return String(sass.renderSync(sassConfig).css);
 };
 
+let parser;
+
 module.exports = {
     process(src, path, config) {
         preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(config.rootDir);
+        parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
         let textCSS = src;
         let lessConfig;
@@ -272,10 +155,11 @@ module.exports = {
                 if (postcssConfig) {
                     postcssPluginWithConfig = postcssPluginWithConfig || postcss(postcssConfig);
                 }
+
                 textCSS = postcssConfig ? postcssPluginWithConfig.process(src).css : postcssNested.process(src).css;
                 break;
         }
 
-        return moduleTemplate.replace('%s', JSON.stringify(getCSSSelectors(textCSS, path)));
+        return moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS, path)));
     },
 };

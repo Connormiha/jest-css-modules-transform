@@ -20,7 +20,6 @@ describe('jest-css-modules', () => {
         it(`should import .${ext} and keyframes should be last`, () => {
             const keys = Object.keys(style);
 
-            expect(keys[0]).toBe('class1');
             // keyframes should be last, like Webpack did it
             expect(keys[keys.length - 1]).toBe('sunrise');
         });
