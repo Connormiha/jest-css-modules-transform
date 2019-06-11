@@ -1,3 +1,6 @@
+## 2.5.0
+Add `:export` support
+
 ## 2.4.0
 Add support for custom path for plugin's config path
 
