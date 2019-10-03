@@ -85,7 +85,7 @@ converted to
         fooBar: 'foo__bar2',
     }
 ```
-Availibale values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
+Available values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
 
 #### Custom config path
 By default option plugin's config file is `jest-css-modules-transform-config.js` from root. For specify custom path just add env `JEST_CSS_MODULES_TRANSFORM_CONFIG`. For example:
