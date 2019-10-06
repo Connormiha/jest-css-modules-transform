@@ -1,8 +1,10 @@
 ---
 extends:
 - eslint:all
+parser: "@typescript-eslint/parser"
 plugins:
 - jest
+- "@typescript-eslint"
 overrides:
 - files:
   - __tests__/**/*.spec.js

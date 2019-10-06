@@ -1,7 +1,7 @@
 module.exports = {
     testRegex: '/__tests__/config-sass\\.spec\\.js$',
     transform: {
-        '.+\\.(sass|scss)$': '<rootDir>/src/index.js',
+        '.+\\.(sass|scss)$': '<rootDir>/dist/index.js',
     },
     bail: true,
     collectCoverageFrom: ['src/**/*.js'],

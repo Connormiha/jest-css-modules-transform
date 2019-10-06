@@ -1,13 +1,15 @@
-const postcss = require('postcss');
-const camelCase = require('camelcase');
-const dashesCamelCase = (str) => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
+import postcss from 'postcss';
+import camelCase from 'camelcase';
+const dashesCamelCase = (str: string) => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
 
-module.exports = class Parser {
-    constructor(cssLoaderConfig) {
+export default class Parser {
+    private _cssLoaderConfig: Record<string, any>;
+
+    constructor(cssLoaderConfig: Record<string, any>) {
         this._cssLoaderConfig = cssLoaderConfig;
     }
 
-    pushToResult(result, className) {
+    pushToResult(result: Record<string, string>, className: string): void {
         switch ((this._cssLoaderConfig || {}).exportLocalsStyle) {
             case 'camelCase':
                 result[className] = className;
@@ -32,12 +34,12 @@ module.exports = class Parser {
         }
     }
 
-    getCSSSelectors(css) {
-        const vars = {};
-        const result = {};
-        const resultAnimations = {};
+    getCSSSelectors(css: string): Record<string, string> {
+        const vars: Record<string, string> = {};
+        const result: Record<string, string> = {};
+        const resultAnimations: Record<string, string> = {};
 
-        const walk = (node) => {
+        const walk = (node: postcss.ChildNode | postcss.Root | postcss.Declaration) => {
             if (!node) {
                 return;
             }
@@ -63,12 +65,12 @@ module.exports = class Parser {
                     this.pushToResult(resultAnimations, node.params);
                 }
             } else if (node.type === 'decl') {
-                if (node.prop && node.parent && node.parent.selector === ':export') {
+                if (node.prop && node.parent && (node.parent as postcss.Rule).selector === ':export') {
                     vars[node.prop] = node.value;
                 }
             }
 
-            if (node.nodes) {
+            if ('nodes' in node) {
                 node.nodes.forEach(walk);
             }
         };
@@ -77,4 +79,4 @@ module.exports = class Parser {
 
         return Object.assign(vars, result, resultAnimations);
     }
-};
+}

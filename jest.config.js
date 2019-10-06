@@ -9,7 +9,7 @@ module.exports = {
         '/__tests__/with-dashes\\.spec\\.js$',
     ],
     transform: {
-        '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/src/index.js',
+        '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/dist/index.js',
         '.+\\.ts$': '<rootDir>/__tests__/preprocessor-typescript.js',
     },
     bail: true,

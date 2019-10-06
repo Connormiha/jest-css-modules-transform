@@ -1,16 +1,22 @@
-'use strict';
+import {sep as pathSep, resolve} from 'path';
+import postcss from 'postcss';
+import Parser from './parser';
+import postcssNestedModule from 'postcss-nested';
+// Only types
+import Stylus from 'stylus';
+import NodeSass from 'node-sass';
+import Less from 'less';
+// eslint-disable-next-line no-unused-vars
+import {Transformer} from '@jest/transform';
 
-const {sep: pathSep, resolve} = require('path');
-const postcss = require('postcss');
-const postcssNested = postcss([require('postcss-nested')]);
-const Parser = require('./parser');
 const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
+const postcssNested = postcss([postcssNestedModule]);
 let postcssConfig = null;
 let postcssPluginWithConfig = null;
 
-let stylus;
-let sass;
-let less;
+let stylus: typeof Stylus;
+let sass: typeof NodeSass;
+let less: typeof Less;
 
 const moduleTemplate = `
     "use strict";
@@ -102,14 +108,14 @@ const getSassContent = (src, path, extention, rootDir) => {
 
 let parser;
 
-module.exports = {
+const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
     process(src, path, config) {
         preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(config.rootDir);
         parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
         let textCSS = src;
-        let lessConfig;
-        let stylusConfig;
+        let lessConfig: Less.Options;
+        let stylusConfig: Record<string, any>;
 
         switch (extention) {
             case 'styl':
@@ -163,3 +169,5 @@ module.exports = {
         return moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS)));
     },
 };
+
+module.exports = moduleTransform;
