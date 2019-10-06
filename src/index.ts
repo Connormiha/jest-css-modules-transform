@@ -1,6 +1,6 @@
 import {sep as pathSep, resolve} from 'path';
 import postcss from 'postcss';
-import Parser from './parser';
+import Parser, {ICSSLoaderConfig} from './parser';
 import postcssNestedModule from 'postcss-nested';
 // Only types
 import Stylus from 'stylus';
@@ -11,7 +11,8 @@ import {Transformer} from '@jest/transform';
 
 const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
 const postcssNested = postcss([postcssNestedModule]);
-let postcssConfig = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let postcssConfig: any;
 let postcssPluginWithConfig = null;
 
 let stylus: typeof Stylus;
@@ -46,9 +47,19 @@ const moduleTemplate = `
         exports.default = data;
     }
 `;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type IPostcssOptions = Record<string, any>;
 
-let preProcessorsConfig;
-const getPreProcessorsConfig = (function wrap() {
+interface IPreProcessorsConfig {
+    cssLoaderConfig: ICSSLoaderConfig;
+    sassConfig: Partial<NodeSass.Options>;
+    lessConfig: Partial<Less.Options>;
+    stylusConfig: Record<string, string | boolean | number>;
+    postcssConfig?: IPostcssOptions;
+}
+
+let preProcessorsConfig: IPreProcessorsConfig;
+const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPreProcessorsConfig {
     const preProcessorsConfigDefalut = {
         sassConfig: {},
         lessConfig: {},
@@ -56,22 +67,22 @@ const getPreProcessorsConfig = (function wrap() {
         cssLoaderConfig: {},
     };
 
-    return (rootDir) => {
+    return (rootDir: string): IPreProcessorsConfig => {
         if (preProcessorsConfig) {
             return preProcessorsConfig;
         }
 
         try {
-            return require(resolve(rootDir, CONFIG_PATH));
+            return require(resolve(rootDir, CONFIG_PATH)) as IPreProcessorsConfig;
         } catch (e) {
             return preProcessorsConfigDefalut;
         }
     };
 }());
 
-let globalSassData;
+let globalSassData: string;
 
-const getGlobalSassData = (rootDir) => {
+const getGlobalSassData = (rootDir: string): string => {
     try {
         return `${require(resolve(rootDir, '.sassrc.js')).data}\n` || '';
     } catch (e) {
@@ -79,20 +90,20 @@ const getGlobalSassData = (rootDir) => {
     }
 };
 
-const requirePostcssConfig = (rootDir) => {
+const requirePostcssConfig = (rootDir: string): IPostcssOptions | null => {
     try {
-        return require(resolve(rootDir, 'postcss.config.js'));
+        return require(resolve(rootDir, 'postcss.config.js')) as IPostcssOptions || null;
     } catch (e) {
         return null;
     }
 };
 
-const getFileExtension = (path) => {
+const getFileExtension = (path: string): string => {
     const filename = path.slice(path.lastIndexOf(pathSep) + 1);
     return filename.slice(filename.lastIndexOf('.') + 1);
 };
 
-const getSassContent = (src, path, extention, rootDir) => {
+const getSassContent = (src: string, path: string, extention: string, rootDir: string): string => {
     sass = sass || require('node-sass');
     globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
     const sassConfig = Object.assign(
@@ -106,7 +117,7 @@ const getSassContent = (src, path, extention, rootDir) => {
     return String(sass.renderSync(sassConfig).css);
 };
 
-let parser;
+let parser: Parser;
 
 const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
     process(src, path, config) {
@@ -115,7 +126,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
         const extention = getFileExtension(path);
         let textCSS = src;
         let lessConfig: Less.Options;
-        let stylusConfig: Record<string, any>;
+        let stylusConfig: Record<string, string | boolean | number>;
 
         switch (extention) {
             case 'styl':

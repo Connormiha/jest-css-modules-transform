@@ -1,16 +1,19 @@
 import postcss from 'postcss';
 import camelCase from 'camelcase';
-const dashesCamelCase = (str: string) => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
+const dashesCamelCase = (str: string): string => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
+export interface ICSSLoaderConfig {
+    exportLocalsStyle?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly';
+}
 
 export default class Parser {
-    private _cssLoaderConfig: Record<string, any>;
+    private _cssLoaderConfig: ICSSLoaderConfig;
 
-    constructor(cssLoaderConfig: Record<string, any>) {
-        this._cssLoaderConfig = cssLoaderConfig;
+    constructor(cssLoaderConfig: ICSSLoaderConfig) {
+        this._cssLoaderConfig = cssLoaderConfig || {};
     }
 
     pushToResult(result: Record<string, string>, className: string): void {
-        switch ((this._cssLoaderConfig || {}).exportLocalsStyle) {
+        switch (this._cssLoaderConfig.exportLocalsStyle) {
             case 'camelCase':
                 result[className] = className;
                 result[camelCase(className)] = className;
@@ -39,7 +42,7 @@ export default class Parser {
         const result: Record<string, string> = {};
         const resultAnimations: Record<string, string> = {};
 
-        const walk = (node: postcss.ChildNode | postcss.Root | postcss.Declaration) => {
+        const walk = (node: postcss.ChildNode | postcss.Root | postcss.Declaration): void => {
             if (!node) {
                 return;
             }
