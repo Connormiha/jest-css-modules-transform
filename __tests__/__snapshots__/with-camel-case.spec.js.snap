@@ -8,5 +8,11 @@ Array [
   "fooZoo",
   "foo",
   "boo",
+  "display-block",
+  "displayBlock",
+  "display-block@sm",
+  "displayBlockSm",
+  "display-block@sm@sm2",
+  "displayBlockSmSm2",
 ]
 `;

@@ -31,6 +31,9 @@ describe('jest-css-modules', () => {
             foo__bar: 'foo__bar',
             foo__zoo: 'foo__zoo',
             boo: 'boo',
+            'display-block': 'display-block',
+            'display-block@sm': 'display-block@sm',
+            'display-block@sm@sm2': 'display-block@sm@sm2',
         });
     });
 

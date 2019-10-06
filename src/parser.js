@@ -1,7 +1,5 @@
 const {camelCase, snakeCase} = require('lodash');
 const postcss = require('postcss');
-const {extractICSS} = require('icss-utils');
-const REG_EXP_NAME_BREAK_CHAR = /[\s,.{/#[:]/;
 
 module.exports = class Parser {
     constructor(cssLoaderConfig) {
@@ -33,99 +31,49 @@ module.exports = class Parser {
         }
     }
 
-    getCSSSelectors(css, path) {
-        const end = css.length;
-        let i = 0;
-        let char;
-        let bracketsCount = 0;
+    getCSSSelectors(css) {
+        const vars = {};
         const result = {};
         const resultAnimations = {};
 
-        while (i < end) {
-            if (i === -1) {
-                throw Error(`Parse error ${path}`);
+        const walk = (node) => {
+            if (!node) {
+                return;
             }
 
-            if (css.indexOf('/*', i) === i) {
-                i = css.indexOf('*/', i + 2);
-
-                // Unclosed comment. Break to avoid infinity loop
-                if (i === -1) {
-                    // Don't parse, but save collected result
-                    return result;
+            if (node.type === 'rule') {
+                if (node.selector) {
+                    node.selector
+                        .split(/[\s+,~+>]+/)
+                        .forEach((str) => {
+                            if (str[0] === '.' || str[0] === '#') {
+                                this.pushToResult(
+                                    result,
+                                    str
+                                        .slice(1)
+                                        .replace(/\\/g, '')
+                                        .replace(/:.*/g, '')
+                                );
+                            }
+                        });
                 }
-
-                continue;
-            }
-
-            char = css[i];
-
-            if (char === '{') {
-                bracketsCount++;
-                i++;
-                continue;
-            }
-
-            if (char === '}') {
-                bracketsCount--;
-                i++;
-                continue;
-            }
-
-            if (char === '"' || char === '\'') {
-                do {
-                    i = css.indexOf(char, i + 1);
-                    // Syntax error since this line. Don't parse, but save collected result
-                    if (i === -1) {
-                        return result;
-                    }
-                } while (css[i - 1] === '\\');
-                i++;
-                continue;
-            }
-
-            if (bracketsCount > 0) {
-                i++;
-                continue;
-            }
-
-            if (char === '.' || char === '#') {
-                i++;
-                const startWord = i;
-
-                while (!REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                    i++;
+            } else if (node.type === 'atrule') {
+                if (node.name === 'keyframes' && node.params) {
+                    this.pushToResult(resultAnimations, node.params);
                 }
-                const word = css.slice(startWord, i);
-
-                this.pushToResult(result, word);
-                continue;
-            }
-
-            if (css.indexOf(':export', i) === i) {
-                i += 7;
-                continue;
-            }
-
-            if (css.indexOf('@keyframes', i) === i) {
-                i += 10;
-                while (REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                    i++;
+            } else if (node.type === 'decl') {
+                if (node.prop && node.parent && node.parent.selector === ':export') {
+                    vars[node.prop] = node.value;
                 }
-
-                const startWord = i;
-                while (!REG_EXP_NAME_BREAK_CHAR.test(css[i])) {
-                    i++;
-                }
-
-                const word = css.slice(startWord, i);
-                this.pushToResult(resultAnimations, word);
-                continue;
             }
 
-            i++;
-        }
+            if (node.nodes) {
+                node.nodes.forEach(walk);
+            }
+        };
 
-        return Object.assign(extractICSS(postcss.parse(css)).icssExports, result, resultAnimations);
+        walk(postcss.parse(css));
+
+        return Object.assign(vars, result, resultAnimations);
     }
 };

@@ -11,3 +11,21 @@
         color: green;
     }
 }
+
+.foo:first-child {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .display-block {
+        display: block;
+    }
+
+    .display-block\@sm {
+        display: block;
+    }
+
+    .display-block\@sm\@sm2 {
+         display: block;
+    }
+}

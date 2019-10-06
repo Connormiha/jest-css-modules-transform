@@ -6,5 +6,8 @@ Array [
   "fooZoo",
   "foo",
   "boo",
+  "displayBlock",
+  "displayBlockSm",
+  "displayBlockSmSm2",
 ]
 `;

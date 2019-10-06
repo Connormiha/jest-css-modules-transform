@@ -32,12 +32,12 @@
     "coverage": "jest --coverage",
     "lint": "eslint src",
     "prepare": "npm run lint && npm test",
-    "test": "npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && JEST_CSS_MODULES_TRANSFORM_CONFIG=other-config.js npm run test:camel-case-only",
+    "test": "npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js ",
     "test:sassrc": "jest --no-cache --config jest-with-sassrc.js",
     "test:camel-case": "jest --no-cache --config jest-with-camel-case.js",
-    "test:camel-case-only": "jest --no-cache --config jest-with-camel-case-only.js",
+    "test:camel-case-only": "JEST_CSS_MODULES_TRANSFORM_CONFIG=other-config.js jest --no-cache --config jest-with-camel-case-only.js",
     "test:dashes": "jest --no-cache --config jest-with-dashes.js"
   },
   "devDependencies": {
@@ -53,7 +53,6 @@
     "typescript": "3.6.3"
   },
   "dependencies": {
-    "icss-utils": "^4.1.1",
     "lodash": "^4.17.15",
     "postcss": "^7.0.18",
     "postcss-nested": "^4.1.2"

@@ -160,6 +160,6 @@ module.exports = {
                 break;
         }
 
-        return moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS, path)));
+        return moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS)));
     },
 };
