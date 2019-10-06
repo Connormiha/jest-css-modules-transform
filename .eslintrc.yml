@@ -34,6 +34,7 @@ rules:
   camelcase: off
   no-magic-numbers: off
   function-paren-newline: off
+  function-call-argument-newline: off
   no-extra-parens: off
   default-case: off
   no-plusplus: off
