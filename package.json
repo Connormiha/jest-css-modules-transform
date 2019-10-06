@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "Mikhail Bodrov",
   "engines": {
-    "node": ">=6.4.0"
+    "node": ">=8.4.0"
   },
   "main": "src/index.js",
   "repository": {

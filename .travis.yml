@@ -1,8 +1,8 @@
-dist: trusty
+dist: bionic
 language: node_js
 
 node_js:
-  - "7"
+  - "8"
 
 before_script:
 - npm run lint
