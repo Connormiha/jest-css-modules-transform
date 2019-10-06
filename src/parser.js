@@ -1,5 +1,6 @@
-const {camelCase, snakeCase} = require('lodash');
 const postcss = require('postcss');
+const camelCase = require('camelcase');
+const dashesCamelCase = (str) => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
 
 module.exports = class Parser {
     constructor(cssLoaderConfig) {
@@ -19,11 +20,11 @@ module.exports = class Parser {
 
             case 'dashes':
                 result[className] = className;
-                result[snakeCase(className).replace(/_/g, '-')] = className;
+                result[dashesCamelCase(className)] = className;
                 break;
 
             case 'dashesOnly':
-                result[snakeCase(className).replace(/_/g, '-')] = className;
+                result[dashesCamelCase(className)] = className;
                 break;
 
             default:

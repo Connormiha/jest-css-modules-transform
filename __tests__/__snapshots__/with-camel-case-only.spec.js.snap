@@ -7,7 +7,7 @@ Array [
   "foo",
   "boo",
   "displayBlock",
-  "displayBlockSm",
-  "displayBlockSmSm2",
+  "displayBlock@sm",
+  "displayBlock@sm@sm2",
 ]
 `;

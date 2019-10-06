@@ -3,15 +3,14 @@
 exports[`jest-css-modules with dashes should have correct object params 1`] = `
 Array [
   "foo__bar",
-  "foo-bar",
   "foo__zoo",
-  "foo-zoo",
   "foo",
   "boo",
   "display-block",
+  "displayBlock",
   "display-block@sm",
-  "display-block-sm",
+  "displayBlock@sm",
   "display-block@sm@sm2",
-  "display-block-sm-sm-2",
+  "displayBlock@sm@sm2",
 ]
 `;

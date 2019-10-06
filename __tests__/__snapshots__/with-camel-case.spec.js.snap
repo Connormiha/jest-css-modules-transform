@@ -11,8 +11,8 @@ Array [
   "display-block",
   "displayBlock",
   "display-block@sm",
-  "displayBlockSm",
+  "displayBlock@sm",
   "display-block@sm@sm2",
-  "displayBlockSmSm2",
+  "displayBlock@sm@sm2",
 ]
 `;

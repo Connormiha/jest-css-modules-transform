@@ -55,6 +55,7 @@ rules:
   max-lines-per-function: off
   global-require: off
   require-jsdoc: off
+  prefer-named-capture-group: off
   no-prototype-builtins: off
   no-continue: off
   no-undefined: off

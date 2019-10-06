@@ -53,7 +53,7 @@
     "typescript": "3.6.3"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "camelcase": "^5.3.1",
     "postcss": "^7.0.18",
     "postcss-nested": "^4.1.2"
   },
