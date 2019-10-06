@@ -1,3 +1,6 @@
+## 3.0.0
+Fix parsing inside `@media` and with unusual names like `name@suffix`
+
 ## 2.5.0
 Add `:export` support
 
