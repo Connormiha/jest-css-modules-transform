@@ -124,7 +124,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
         preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(config.rootDir);
         parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
-        let textCSS = src;
+        let textCSS: string | postcss.LazyResult = src;
         let lessConfig: Less.Options;
         let stylusConfig: Record<string, string | boolean | number>;
 
@@ -173,7 +173,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                     postcssPluginWithConfig = postcssPluginWithConfig || postcss(postcssConfig);
                 }
 
-                textCSS = postcssConfig ? postcssPluginWithConfig.process(src).css : postcssNested.process(src).css;
+                textCSS = postcssConfig ? postcssPluginWithConfig.process(src) : postcssNested.process(src);
                 break;
         }
 

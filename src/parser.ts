@@ -37,7 +37,7 @@ export default class Parser {
         }
     }
 
-    getCSSSelectors(css: string | postcss.Root): Record<string, string> {
+    getCSSSelectors(css: string | postcss.LazyResult): Record<string, string> {
         const vars: Record<string, string> = {};
         const result: Record<string, string> = {};
         const resultAnimations: Record<string, string> = {};
@@ -84,7 +84,7 @@ export default class Parser {
         if (typeof css === 'string') {
             walk(postcss.parse(css));
         } else {
-            walk(css);
+            walk(css.root);
         }
 
         return Object.assign(vars, result, resultAnimations);
