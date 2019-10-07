@@ -1,3 +1,6 @@
+## 3.0.1
+Fix skip parsing with selectors like `.class1.class2.class3`
+
 ## 3.0.0
 Fix parsing inside `@media` and with unusual names like `name@suffix`
 
