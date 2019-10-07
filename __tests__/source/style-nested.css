@@ -14,6 +14,30 @@
 
 .foo:first-child {
     display: none;
+
+    div {
+        color: red;
+    }
+
+    span {
+        color: red;
+    }
+}
+
+.foo.foox {
+    color: green;
+}
+
+div.foo.foox {
+    color: green;
+}
+
+div.foo.fooy#fooz {
+    color: green;
+}
+
+div.foo.fooy#fooz ~ .tilda + .plus > .children {
+    color: yellow;
 }
 
 @media (max-width: 600px) {

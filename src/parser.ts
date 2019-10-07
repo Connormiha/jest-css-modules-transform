@@ -52,14 +52,17 @@ export default class Parser {
                     node.selector
                         .split(/[\s+,~+>]+/)
                         .forEach((str) => {
-                            if (str[0] === '.' || str[0] === '#') {
-                                this.pushToResult(
-                                    result,
-                                    str
-                                        .slice(1)
-                                        .replace(/\\/g, '')
-                                        .replace(/:.*/g, '')
-                                );
+                            const strs = str.match(/[.#][^.#]+/g);
+                            if (strs) {
+                                strs.forEach((name) => {
+                                    this.pushToResult(
+                                        result,
+                                        name
+                                            .slice(1)
+                                            .replace(/\\/g, '')
+                                            .replace(/:.*/g, '')
+                                    );
+                                });
                             }
                         });
                 }
