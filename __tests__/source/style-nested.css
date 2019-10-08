@@ -40,6 +40,16 @@ div.foo.fooy#fooz ~ .tilda + .plus > .children {
     color: yellow;
 }
 
+/*
+div.foo1.fooy1#fooz1 ~ .tilda1 + .plus1 > .children1 {
+    color: yellow;
+}
+*/
+
+div.foo2.fooy2#fooz2~.tilda2+.plus2>.children2:last-child {
+    color: yellow;
+}
+
 @media (max-width: 600px) {
     .display-block {
         display: block;

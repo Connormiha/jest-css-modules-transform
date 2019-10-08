@@ -2,7 +2,7 @@ import postcss from 'postcss';
 import camelCase from 'camelcase';
 const dashesCamelCase = (str: string): string => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
 export interface ICSSLoaderConfig {
-    exportLocalsStyle?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly';
+    exportLocalsStyle?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly' | 'asIs';
 }
 
 export default class Parser {
@@ -50,7 +50,7 @@ export default class Parser {
             if (node.type === 'rule') {
                 if (node.selector) {
                     node.selector
-                        .split(/[\s+,~+>]+/)
+                        .split(/[\s,~+>]+/)
                         .forEach((str) => {
                             const strs = str.match(/[.#][^.#]+/g);
                             if (strs) {
