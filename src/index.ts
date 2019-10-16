@@ -1,13 +1,21 @@
 import {sep as pathSep, resolve} from 'path';
+import {
+    execSync,
+    ExecSyncOptionsWithStringEncoding,
+} from 'child_process';
 import postcss from 'postcss';
-import Parser, {ICSSLoaderConfig} from './parser';
+import Parser from './parser';
 import postcssNestedModule from 'postcss-nested';
 // Only types
 import Stylus from 'stylus';
 import NodeSass from 'node-sass';
-import Less from 'less';
 // eslint-disable-next-line no-unused-vars
 import {Transformer} from '@jest/transform';
+import {
+    getPreProcessorsConfig,
+    IPreProcessorsConfig,
+    IPostcssOptions,
+} from './utils';
 
 const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
 const postcssNested = postcss([postcssNestedModule]);
@@ -17,7 +25,6 @@ let postcssPluginWithConfig = null;
 
 let stylus: typeof Stylus;
 let sass: typeof NodeSass;
-let less: typeof Less;
 
 const moduleTemplate = `
     "use strict";
@@ -47,38 +54,8 @@ const moduleTemplate = `
         exports.default = data;
     }
 `;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type IPostcssOptions = Record<string, any>;
-
-interface IPreProcessorsConfig {
-    cssLoaderConfig: ICSSLoaderConfig;
-    sassConfig: Partial<NodeSass.Options>;
-    lessConfig: Partial<Less.Options>;
-    stylusConfig: Record<string, string | boolean | number>;
-    postcssConfig?: IPostcssOptions;
-}
 
 let preProcessorsConfig: IPreProcessorsConfig;
-const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPreProcessorsConfig {
-    const preProcessorsConfigDefalut = {
-        sassConfig: {},
-        lessConfig: {},
-        stylusConfig: {},
-        cssLoaderConfig: {},
-    };
-
-    return (rootDir: string): IPreProcessorsConfig => {
-        if (preProcessorsConfig) {
-            return preProcessorsConfig;
-        }
-
-        try {
-            return require(resolve(rootDir, CONFIG_PATH)) as IPreProcessorsConfig;
-        } catch (e) {
-            return preProcessorsConfigDefalut;
-        }
-    };
-}());
 
 let globalSassData: string;
 
@@ -118,14 +95,20 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
 };
 
 let parser: Parser;
+let configPath = '';
+const lessPath = resolve(__dirname, 'less.js');
+const nodeExecOptions: ExecSyncOptionsWithStringEncoding = {
+    encoding: 'utf-8',
+    maxBuffer: 1024 * 1024 * 1024,
+};
 
 const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
     process(src, path, config) {
-        preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(config.rootDir);
+        configPath = configPath || resolve(config.rootDir, CONFIG_PATH);
+        preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(configPath);
         parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
-        let textCSS: string | postcss.LazyResult = src;
-        let lessConfig: Less.Options;
+        let textCSS: string | postcss.LazyResult = '';
         let stylusConfig: Record<string, string | boolean | number>;
 
         switch (extention) {
@@ -151,20 +134,9 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                 break;
 
             case 'less':
-                less = less || require('less');
-                lessConfig = Object.assign(
-                    preProcessorsConfig.lessConfig || {},
-                    {filename: path}
-                );
-                less.render(src, lessConfig, (err, css) => {
-                    if (err) {
-                        throw err;
-                    }
-
-                    textCSS = css.css;
-                });
-
+                textCSS = execSync(`node ${lessPath} ${path} ${configPath}`, nodeExecOptions);
                 break;
+
             case 'css':
             case 'pcss':
             case 'postcss':
