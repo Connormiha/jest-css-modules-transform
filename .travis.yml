@@ -1,8 +1,13 @@
 dist: bionic
 language: node_js
 
-node_js:
-  - "8"
+matrix:
+  include:
+    - os: linux
+      node_js: "8"
+      dist: bionic
+    - os: windows
+      node_js: "10"
 
 before_script:
 - npm run lint
