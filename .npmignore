@@ -11,6 +11,7 @@ jest-with-camel-case.js
 jest-with-camel-case-only.js
 jest-with-dashes.js
 tsconfig.json
+test.js
 __tests__
 src
 coverage
