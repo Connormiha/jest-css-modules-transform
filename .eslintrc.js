@@ -72,7 +72,7 @@ module.exports = {
       'array-element-newline': 'off',
       'valid-jsdoc': 'off',
       'no-sync': 'off',
-      'linebreak-style': ['error', 'unix'],
+      'linebreak-style': 'off',
       'func-style': 'off',
       'no-process-env': 'off',
       'no-param-reassign': 'off',
