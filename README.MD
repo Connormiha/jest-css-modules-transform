@@ -30,6 +30,9 @@ In Jest config add option
 
 It supports `pure CSS`, `SCSS`, `SASS`, `STYLUS` and `LESS`.  
 
+#### For PostCSS
+For `.css`, `.pcss`, `.postcss` files used `postcss.config.js` from root folder(if file exist of course).  
+For tests you can rewrite your existed `postcss.config.js`. See options.
 ### Options
 You can save preproccessor options in file `jest-css-modules-transform-config.js` in root of your project(Where is the file `package.json`).
 You can pass options for your preprocessors.
