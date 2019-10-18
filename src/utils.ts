@@ -29,3 +29,11 @@ export const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPr
         }
     };
 }());
+
+export const requirePostcssConfig = (postcssConfigPath: string): IPostcssOptions | null => {
+    try {
+        return require(postcssConfigPath) as IPostcssOptions || null;
+    } catch (e) {
+        return null;
+    }
+};

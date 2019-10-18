@@ -7,6 +7,15 @@ import {
 } from './utils';
 const [,, filePath, configPath] = process.argv;
 
+// eslint-disable-next-line no-console
+const originalConsoleLog = console.log;
+// eslint-disable-next-line no-console
+console.log = (): void => {};
+// eslint-disable-next-line no-console
+console.warn = (): void => {};
+// eslint-disable-next-line no-console
+console.info = (): void => {};
+
 less.render(
     readFileSync(filePath, {encoding: 'utf-8'}),
     Object.assign(
@@ -15,8 +24,7 @@ less.render(
     ) as Less.Options,
 ).then(
     ({css}) => {
-        // eslint-disable-next-line no-console
-        console.log(css);
+        originalConsoleLog.call(console, css);
     },
     (error) => {
         // eslint-disable-next-line no-console

@@ -35,13 +35,12 @@
     "prepare": "npm run lint && npm test",
     "test": "node test.js",
     "test:unix": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only",
-    "test:windows": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only-windows",
+    "test:windows": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes",
     "test:base": "jest --no-cache ",
-    "test:config": "jest --no-cache --config jest-with-css-config.js ",
+    "test:config": "jest --no-cache --config jest-with-css-config.js",
     "test:sassrc": "jest --no-cache --config jest-with-sassrc.js",
     "test:camel-case": "jest --no-cache --config jest-with-camel-case.js",
     "test:camel-case-only": "JEST_CSS_MODULES_TRANSFORM_CONFIG=other-config.js jest --no-cache --config jest-with-camel-case-only.js",
-    "test:camel-case-only-windows": "$env:JEST_CSS_MODULES_TRANSFORM_CONFIG=\"other-config.js\" jest --no-cache --config jest-with-camel-case-only.js",
     "test:dashes": "jest --no-cache --config jest-with-dashes.js"
   },
   "devDependencies": {

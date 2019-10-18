@@ -34,4 +34,9 @@ describe('config', () => {
         const stulysFile = require('./source/style-with-config.styl');
         expect(stulysFile).toMatchSnapshot();
     });
+
+    it('should import .css', () => {
+        const cssFile = require('./source/style-with-config.css');
+        expect(cssFile).toMatchSnapshot();
+    });
 });

@@ -8,4 +8,7 @@ module.exports = {
     },
     lessConfig: {paths: [additionalResolvePath]},
     stylusConfig: {paths: [additionalResolvePath]},
+    postcssConfig: {
+        plugins: [require('postcss-nested')],
+    },
 };

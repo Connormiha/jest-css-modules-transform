@@ -14,14 +14,13 @@ import {Transformer} from '@jest/transform';
 import {
     getPreProcessorsConfig,
     IPreProcessorsConfig,
-    IPostcssOptions,
+    requirePostcssConfig,
 } from './utils';
 
 const CONFIG_PATH = process.env.JEST_CSS_MODULES_TRANSFORM_CONFIG || 'jest-css-modules-transform-config.js';
 const postcssNested = postcss([postcssNestedModule]);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let postcssConfig: any;
-let postcssPluginWithConfig = null;
 
 let stylus: typeof Stylus;
 let sass: typeof NodeSass;
@@ -67,14 +66,6 @@ const getGlobalSassData = (rootDir: string): string => {
     }
 };
 
-const requirePostcssConfig = (rootDir: string): IPostcssOptions | null => {
-    try {
-        return require(resolve(rootDir, 'postcss.config.js')) as IPostcssOptions || null;
-    } catch (e) {
-        return null;
-    }
-};
-
 const getFileExtension = (path: string): string => {
     const filename = path.slice(path.lastIndexOf(pathSep) + 1);
     return filename.slice(filename.lastIndexOf('.') + 1);
@@ -96,7 +87,9 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
 
 let parser: Parser;
 let configPath = '';
+let postcssConfigPath = '';
 const lessPath = resolve(__dirname, 'less.js');
+const postcssPath = resolve(__dirname, 'postcss.js');
 const nodeExecOptions: ExecSyncOptionsWithStringEncoding = {
     encoding: 'utf-8',
     maxBuffer: 1024 * 1024 * 1024,
@@ -140,12 +133,15 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
             case 'css':
             case 'pcss':
             case 'postcss':
-                postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(config.rootDir);
+                postcssConfigPath = '' || resolve(config.rootDir, 'postcss.config.js');
+                postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(postcssConfigPath);
+
                 if (postcssConfig) {
-                    postcssPluginWithConfig = postcssPluginWithConfig || postcss(postcssConfig);
+                    textCSS = execSync(`node ${postcssPath} ${path} ${configPath} ${postcssConfigPath}`, nodeExecOptions);
+                } else {
+                    textCSS = postcssNested.process(src);
                 }
 
-                textCSS = postcssConfig ? postcssPluginWithConfig.process(src) : postcssNested.process(src);
                 break;
         }
 
