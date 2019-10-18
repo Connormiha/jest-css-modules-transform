@@ -1,3 +1,6 @@
+## 3.1.0
+Add support for async plugins for `Less` and `PostCSS`
+
 ## 3.0.1
 Fix skip parsing with selectors like `.class1.class2.class3`
 
