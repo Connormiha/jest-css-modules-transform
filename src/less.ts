@@ -7,13 +7,13 @@ import {
 } from './utils';
 const [,, filePath, configPath] = process.argv;
 
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console, @typescript-eslint/no-empty-function
 const originalConsoleLog = console.log;
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console, @typescript-eslint/no-empty-function
 console.log = (): void => {};
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console, @typescript-eslint/no-empty-function
 console.warn = (): void => {};
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console, @typescript-eslint/no-empty-function
 console.info = (): void => {};
 
 less.render(

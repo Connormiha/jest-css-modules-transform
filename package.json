@@ -44,27 +44,27 @@
     "test:dashes": "jest --no-cache --config jest-with-dashes.js"
   },
   "devDependencies": {
-    "@jest/transform": "^24.9.0",
-    "@types/less": "^3.0.0",
-    "@types/node": "12.7.11",
-    "@types/node-sass": "^4.11.0",
-    "@types/postcss-nested": "^4.1.0",
-    "@types/stylus": "^0.48.31",
-    "@typescript-eslint/eslint-plugin": "^2.3.2",
-    "@typescript-eslint/parser": "^2.3.2",
-    "eslint": "6.5.1",
-    "eslint-plugin-jest": "22.17.0",
-    "husky": "3.0.8",
+    "@jest/transform": "24.9.0",
+    "@types/less": "3.0.1",
+    "@types/node": "13.1.6",
+    "@types/node-sass": "4.11.0",
+    "@types/postcss-nested": "4.1.0",
+    "@types/stylus": "0.48.32",
+    "@typescript-eslint/eslint-plugin": "2.15.0",
+    "@typescript-eslint/parser": "2.15.0",
+    "eslint": "6.8.0",
+    "eslint-plugin-jest": "23.3.0",
+    "husky": "4.0.3",
     "jest": "24.9.0",
     "less": "3.10.3",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.0",
     "stylus": "0.54.7",
-    "typescript": "3.6.3"
+    "typescript": "3.7.4"
   },
   "dependencies": {
     "camelcase": "^5.3.1",
-    "postcss": "^7.0.18",
-    "postcss-nested": "^4.1.2"
+    "postcss": "^7.0.26",
+    "postcss-nested": "^4.2.1"
   },
   "husky": {
     "hooks": {
