@@ -24,6 +24,12 @@ In testing you need to mock all css modules to aviod exception. But use pure obj
 In Jest config add option
 ```json
 "transform": {
+  ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
+},
+```
+or
+```json
+"transform": {
   ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform"
 },
 ```
@@ -91,11 +97,12 @@ converted to
 Available values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
 
 #### prepend
-Type: `string`, `Function`, `Array<string | Function>`,
+Type: `string`, `Function`, `Array<string | Function>`  
 Default: `null`
 
-Pass urls for prepend(before file content) to transformed files. 
-Useful in a situation where the module uses variables or mixins without explicit import.  
+Pass urls for prepend(before file content) to transformed files.  
+Useful in a situation where the module uses variables or mixins without explicit import. 
+
 For example you have vars in file, but without implicit import. You can prepend file with `sass` variables before convert module.
 ###### Example with array of paths
 ```js
@@ -129,7 +136,7 @@ module.exports = {
 
        return [
             'common/vars.scss',
-            'common/vars.scss',
+            'common/vars2.scss',
        ];
    },
 };

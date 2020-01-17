@@ -49,7 +49,7 @@
     "@jest/transform": "24.9.0",
     "@types/jest": "^24.9.0",
     "@types/less": "3.0.1",
-    "@types/node": "13.1.7",
+    "@types/node": "13.1.8",
     "@types/node-sass": "4.11.0",
     "@types/postcss-nested": "4.1.0",
     "@types/stylus": "0.48.32",
