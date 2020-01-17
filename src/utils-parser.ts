@@ -30,7 +30,7 @@ export const extractUrls = (prependConfig: IPrependDataConfig, filepath: string)
         }
     }
 
-    return urls;
+    return urls.filter(Boolean);
 };
 
 export const createFileCache = (cwd: string): (filepath: string) => string => {

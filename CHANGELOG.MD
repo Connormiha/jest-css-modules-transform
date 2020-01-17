@@ -1,3 +1,18 @@
+## 4.0.0
+Node 8 is no longer supported
+Add `prepend` property for config.
+No posible define files for prepend(before main content) to each imported css module.
+##### Example (cancat SASS vars for each module before transfromation)
+```js
+// file jest-css-modules-transform-config.js
+module.exports = {
+   prepend: [
+       'some/url/vars.scss',
+       'some/url/theme.scss',
+   ],
+};
+```
+
 ## 3.1.0
 Add support for async plugins for `Less` and `PostCSS`
 

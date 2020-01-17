@@ -90,6 +90,51 @@ converted to
 ```
 Available values `camelCase`, `camelCaseOnly`, `dashes`, `dashesOnly`, `asIs`(by default)
 
+#### prepend
+Type: `string`, `Function`, `Array<string | Function>`,
+Default: `null`
+
+Pass urls for prepend(before file content) to transformed files. 
+For example you have vars in file, but without implicit import. You can prepend file with `sass` variables before convert module.
+###### Example with array of paths
+```js
+// file jest-css-modules-transform-config.js
+module.exports = {
+   prepend: [
+       'some/url/vars.scss',
+       'some/url/theme.scss',
+   ],
+};
+```
+###### Example with single string
+```js
+// file jest-css-modules-transform-config.js
+module.exports = {
+   prepend: 'some/url/vars.scss',
+};
+```
+
+###### Example with custom function
+```js
+// file jest-css-modules-transform-config.js
+module.exports = {
+   prepend: (filepath) => {
+       if (filepath.includes('components')) {
+           return [
+               'components/vars.scss',
+               'components2/vars.scss',
+           ];
+       }
+
+       return [
+            'common/vars.scss',
+            'common/vars.scss',
+       ];
+   },
+};
+```
+It works with any preprocessors(Sass, Less, Styles, PostCSS, pure CSS)
+
 #### Custom config path
 By default option plugin's config file is `jest-css-modules-transform-config.js` from root. For specify custom path just add env `JEST_CSS_MODULES_TRANSFORM_CONFIG`. For example:
 ```bash
