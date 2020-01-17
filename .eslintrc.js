@@ -51,6 +51,7 @@ module.exports = {
         'error',
         'as-needed'
       ],
+      complexity: 'off',
       'sort-imports': 'off',
       'id-length': 'off',
       'sort-keys': 'off',

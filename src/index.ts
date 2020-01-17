@@ -4,7 +4,7 @@ import {
     ExecSyncOptionsWithStringEncoding,
 } from 'child_process';
 import postcss from 'postcss';
-import Parser from './parser';
+import Parser, {extractUrls} from './parser';
 import postcssNestedModule from 'postcss-nested';
 // Only types
 import Stylus from 'stylus';
@@ -12,6 +12,7 @@ import NodeSass from 'node-sass';
 // eslint-disable-next-line no-unused-vars
 import {Transformer} from '@jest/transform';
 import {
+    createFileCache,
     getPreProcessorsConfig,
     IPreProcessorsConfig,
     requirePostcssConfig,
@@ -94,15 +95,24 @@ const nodeExecOptions: ExecSyncOptionsWithStringEncoding = {
     encoding: 'utf-8',
     maxBuffer: 1024 * 1024 * 1024,
 };
+let getFileData;
 
 const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
     process(src, path, config) {
+        getFileData = getFileData || createFileCache(config.cwd);
         configPath = configPath || resolve(config.rootDir, CONFIG_PATH);
         preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(configPath);
         parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
         let textCSS: string | postcss.LazyResult = '';
+        let prependDataContent = '';
         let stylusConfig: Record<string, string | boolean | number>;
+
+        if (preProcessorsConfig.prepend) {
+            const urls = extractUrls(preProcessorsConfig.prepend, path);
+
+            prependDataContent = urls.map(getFileData).join('\n\r');
+        }
 
         switch (extention) {
             case 'styl':
@@ -111,7 +121,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                     preProcessorsConfig.stylusConfig || {},
                     {filename: path}
                 );
-                stylus.render(src, stylusConfig, (err, css) => {
+                stylus.render(prependDataContent + src, stylusConfig, (err, css) => {
                     if (err) {
                         throw err;
                     }
@@ -123,11 +133,17 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
 
             case 'sass':
             case 'scss':
-                textCSS = getSassContent(src, path, extention, config.rootDir);
+                textCSS = getSassContent(prependDataContent + src, path, extention, config.rootDir);
                 break;
 
             case 'less':
-                textCSS = execSync(`node ${lessPath} ${path} ${configPath}`, nodeExecOptions);
+                textCSS = execSync(
+                    `node ${lessPath} ${path} ${configPath} ${prependDataContent ? 1 : 0}`,
+                    {
+                        ...nodeExecOptions,
+                        input: prependDataContent,
+                    },
+                );
                 break;
 
             case 'css':
@@ -137,9 +153,15 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                 postcssConfig = postcssConfig || preProcessorsConfig.postcssConfig || requirePostcssConfig(postcssConfigPath);
 
                 if (postcssConfig) {
-                    textCSS = execSync(`node ${postcssPath} ${path} ${configPath} ${postcssConfigPath}`, nodeExecOptions);
+                    textCSS = execSync(
+                        `node ${postcssPath} ${path} ${configPath} ${postcssConfigPath} ${prependDataContent ? 1 : 0}`,
+                        {
+                            ...nodeExecOptions,
+                            input: prependDataContent,
+                        },
+                    );
                 } else {
-                    textCSS = postcssNested.process(src);
+                    textCSS = postcssNested.process(prependDataContent ? `${prependDataContent}\n\r${src}` : src);
                 }
 
                 break;

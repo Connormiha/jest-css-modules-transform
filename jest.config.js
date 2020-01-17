@@ -7,6 +7,7 @@ module.exports = {
         '/__tests__/with-camel-case\\.spec\\.js$',
         '/__tests__/with-camel-case-only\\.spec\\.js$',
         '/__tests__/with-dashes\\.spec\\.js$',
+        '/__tests__/prepend-data\\.spec\\.js$',
     ],
     transform: {
         '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/dist/index.js',

@@ -41,7 +41,8 @@
     "test:sassrc": "jest --no-cache --config jest-with-sassrc.js",
     "test:camel-case": "jest --no-cache --config jest-with-camel-case.js",
     "test:camel-case-only": "JEST_CSS_MODULES_TRANSFORM_CONFIG=other-config.js jest --no-cache --config jest-with-camel-case-only.js",
-    "test:dashes": "jest --no-cache --config jest-with-dashes.js"
+    "test:dashes": "jest --no-cache --config jest-with-dashes.js",
+    "test:prepend-data": "jest --no-cache --config jest-prepend-data.js"
   },
   "devDependencies": {
     "@jest/transform": "24.9.0",
