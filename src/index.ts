@@ -4,7 +4,11 @@ import {
     ExecSyncOptionsWithStringEncoding,
 } from 'child_process';
 import postcss from 'postcss';
-import Parser, {extractUrls} from './parser';
+import Parser from './parser';
+import {
+    createFileCache,
+    extractUrls,
+} from './utils-parser';
 import postcssNestedModule from 'postcss-nested';
 // Only types
 import Stylus from 'stylus';
@@ -12,7 +16,6 @@ import NodeSass from 'node-sass';
 // eslint-disable-next-line no-unused-vars
 import {Transformer} from '@jest/transform';
 import {
-    createFileCache,
     getPreProcessorsConfig,
     IPreProcessorsConfig,
     requirePostcssConfig,

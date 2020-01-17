@@ -1,11 +1,11 @@
 // Only types
 import NodeSass from 'node-sass';
-import fs from 'fs';
-import path from 'path';
 import {
     ICSSLoaderConfig,
-    IPrependDataConfig,
 } from './parser';
+import {
+    IPrependDataConfig,
+} from './utils-parser';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IPostcssOptions = Record<string, any>;
@@ -42,23 +42,6 @@ export const requirePostcssConfig = (postcssConfigPath: string): IPostcssOptions
     } catch (e) {
         return null;
     }
-};
-
-export const createFileCache = (cwd: string): (filepath: string) => string => {
-    const cache = new Map();
-
-    return (filepath: string): string => {
-        const normalizedPath = path.isAbsolute(filepath) ? filepath : path.resolve(cwd, filepath);
-
-        if (cache.has(normalizedPath)) {
-            return cache.get(normalizedPath);
-        }
-
-        const fileData = fs.readFileSync(normalizedPath, {encoding: 'utf-8'});
-        cache.set(normalizedPath, fileData);
-
-        return fileData;
-    };
 };
 
 export async function readStream(stream: NodeJS.ReadStream, render: (content: string) => void): Promise<void> {

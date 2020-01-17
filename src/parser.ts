@@ -4,30 +4,6 @@ const dashesCamelCase = (str: string): string => str.replace(/-+(\w)/g, (match, 
 export interface ICSSLoaderConfig {
     exportLocalsStyle?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly' | 'asIs';
 }
-export type IPrependDataFunction = (path: string) => string | string[];
-export type IPrependDataConfig = string | IPrependDataFunction | Array<IPrependDataFunction | string>;
-
-export const extractUrls = (prependConfig: IPrependDataConfig, path: string): string[] => {
-    const urls: string[] = [];
-    if (typeof prependConfig === 'string') {
-        urls.push(prependConfig);
-    } else if (Array.isArray(prependConfig)) {
-        for (const prepentItem of prependConfig) {
-            if (typeof prepentItem === 'string') {
-                urls.push(prepentItem);
-            } else {
-                const dynamicUrls = prepentItem(path);
-                if (Array.isArray(dynamicUrls)) {
-                    urls.push(...dynamicUrls);
-                } else {
-                    urls.push(dynamicUrls);
-                }
-            }
-        }
-    }
-
-    return urls;
-};
 
 export default class Parser {
     private _cssLoaderConfig: ICSSLoaderConfig;

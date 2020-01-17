@@ -5,6 +5,7 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true
     },
+    "baseUrl" : "src",
     "compileOnSave": false,
     "buildOnSave": false,
     "atom": {

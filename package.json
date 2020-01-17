@@ -34,7 +34,7 @@
     "lint": "eslint src --ext ts",
     "prepare": "npm run lint && npm test",
     "test": "node test.js",
-    "test:unix": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only",
+    "test:unix": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only && jest --no-cache --config jest-prepend-data.js",
     "test:windows": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js",
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@jest/transform": "24.9.0",
+    "@types/jest": "^24.9.0",
     "@types/less": "3.0.1",
     "@types/node": "13.1.7",
     "@types/node-sass": "4.11.0",

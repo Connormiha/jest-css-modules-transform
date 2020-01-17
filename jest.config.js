@@ -15,4 +15,8 @@ module.exports = {
     },
     bail: true,
     collectCoverageFrom: ['src/**/*.js'],
+    moduleDirectories: [
+        'node_modules',
+        'src',
+    ],
 };
