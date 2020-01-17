@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest-css-modules prependData relative path should have correct object params sass 1`] = `
+Array [
+  "prepended-class",
+  "class",
+  "class2",
+  "foo",
+  "bar",
+  "dar",
+]
+`;
+
+exports[`jest-css-modules prependData relative path should have correct object params stylus 1`] = `
+Array [
+  "prepended-class",
+  "class",
+  "class2",
+  "foo",
+  "bar",
+  "dar",
+]
+`;

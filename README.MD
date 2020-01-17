@@ -95,6 +95,7 @@ Type: `string`, `Function`, `Array<string | Function>`,
 Default: `null`
 
 Pass urls for prepend(before file content) to transformed files. 
+Useful in a situation where the module uses variables or mixins without explicit import.  
 For example you have vars in file, but without implicit import. You can prepend file with `sass` variables before convert module.
 ###### Example with array of paths
 ```js

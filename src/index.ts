@@ -78,6 +78,7 @@ const getFileExtension = (path: string): string => {
 const getSassContent = (src: string, path: string, extention: string, rootDir: string): string => {
     sass = sass || require('node-sass');
     globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
+
     const sassConfig = Object.assign(
         preProcessorsConfig.sassConfig || {},
         {
@@ -124,7 +125,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                     preProcessorsConfig.stylusConfig || {},
                     {filename: path}
                 );
-                stylus.render(prependDataContent + src, stylusConfig, (err, css) => {
+                stylus.render(prependDataContent ? `${prependDataContent}\n\r${src}` : src, stylusConfig, (err, css) => {
                     if (err) {
                         throw err;
                     }
@@ -136,7 +137,12 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
 
             case 'sass':
             case 'scss':
-                textCSS = getSassContent(prependDataContent + src, path, extention, config.rootDir);
+                textCSS = getSassContent(
+                    prependDataContent ? `${prependDataContent}\n\r${src}` : src,
+                    path,
+                    extention,
+                    config.rootDir,
+                );
                 break;
 
             case 'less':
