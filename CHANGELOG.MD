@@ -1,7 +1,8 @@
 ## 4.0.0
-Node 8 is no longer supported
-Add `prepend` property for config.
-No posible define files for prepend(before main content) to each imported css module.
+Node 8 is no longer supported  
+Add `prepend` property for config.  
+Now posible define files for prepend(before main content) to each imported css module.
+Useful in a situation where the module uses variables or mixins without explicit import.
 ##### Example (cancat SASS vars for each module before transfromation)
 ```js
 // file jest-css-modules-transform-config.js
