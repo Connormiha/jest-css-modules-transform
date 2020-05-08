@@ -46,27 +46,27 @@
     "test:prepend-data-relative": "jest --no-cache --config jest-prepend-data-relative-path.js"
   },
   "devDependencies": {
-    "@jest/transform": "25.2.6",
+    "@jest/transform": "26.0.1",
     "@types/jest": "25.2.1",
     "@types/less": "3.0.1",
-    "@types/node": "13.11.0",
+    "@types/node": "13.13.5",
     "@types/node-sass": "4.11.0",
-    "@types/postcss-nested": "4.1.0",
+    "@types/postcss-nested": "4.2.3",
     "@types/stylus": "0.48.32",
-    "@typescript-eslint/eslint-plugin": "2.26.0",
-    "@typescript-eslint/parser": "2.26.0",
+    "@typescript-eslint/eslint-plugin": "2.31.0",
+    "@typescript-eslint/parser": "2.31.0",
     "eslint": "6.8.0",
-    "eslint-plugin-jest": "23.8.2",
-    "husky": "4.2.3",
-    "jest": "25.2.7",
+    "eslint-plugin-jest": "23.9.0",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
     "less": "3.11.1",
-    "node-sass": "4.13.1",
+    "node-sass": "4.14.1",
     "stylus": "0.54.7",
     "typescript": "3.8.3"
   },
   "dependencies": {
-    "camelcase": "^5.3.1",
-    "postcss": "^7.0.27",
+    "camelcase": "6.0.0",
+    "postcss": "7.0.29",
     "postcss-nested": "^4.2.1"
   },
   "husky": {
