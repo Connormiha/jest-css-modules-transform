@@ -1,5 +1,5 @@
 // Only types
-import NodeSass from 'node-sass';
+import type {SyncOptions} from 'node-sass';
 import {
     ICSSLoaderConfig,
 } from './parser';
@@ -12,7 +12,7 @@ export type IPostcssOptions = Record<string, any>;
 
 export interface IPreProcessorsConfig {
     cssLoaderConfig: ICSSLoaderConfig;
-    sassConfig: Partial<NodeSass.Options>;
+    sassConfig: Partial<SyncOptions>;
     lessConfig: Partial<Less.Options>;
     stylusConfig: Record<string, string | boolean | number>;
     postcssConfig?: IPostcssOptions;

@@ -47,26 +47,26 @@
   },
   "devDependencies": {
     "@jest/transform": "26.0.1",
-    "@types/jest": "25.2.1",
+    "@types/jest": "25.2.2",
     "@types/less": "3.0.1",
-    "@types/node": "13.13.5",
+    "@types/node": "14.0.1",
     "@types/node-sass": "4.11.0",
     "@types/postcss-nested": "4.2.3",
     "@types/stylus": "0.48.32",
-    "@typescript-eslint/eslint-plugin": "2.31.0",
-    "@typescript-eslint/parser": "2.31.0",
+    "@typescript-eslint/eslint-plugin": "2.33.0",
+    "@typescript-eslint/parser": "2.33.0",
     "eslint": "7.0.0",
-    "eslint-plugin-jest": "23.10.0",
+    "eslint-plugin-jest": "23.11.0",
     "husky": "4.2.5",
     "jest": "26.0.1",
     "less": "3.11.1",
     "node-sass": "4.14.1",
     "stylus": "0.54.7",
-    "typescript": "3.8.3"
+    "typescript": "3.9.2"
   },
   "dependencies": {
-    "camelcase": "6.0.0",
-    "postcss": "7.0.29",
+    "camelcase": "^6.0.0",
+    "postcss": "^7.0.30",
     "postcss-nested": "^4.2.1"
   },
   "husky": {

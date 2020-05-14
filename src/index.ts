@@ -10,11 +10,9 @@ import {
     extractUrls,
 } from './utils-parser';
 import postcssNestedModule from 'postcss-nested';
-// Only types
-import Stylus from 'stylus';
-import NodeSass from 'node-sass';
-// eslint-disable-next-line no-unused-vars
-import {Transformer} from '@jest/transform';
+import type Stylus from 'stylus';
+import type NodeSass from 'node-sass';
+import type {Transformer} from '@jest/transform';
 import {
     getPreProcessorsConfig,
     IPreProcessorsConfig,
@@ -79,7 +77,7 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
     sass = sass || require('node-sass');
     globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
 
-    const sassConfig = Object.assign(
+    const sassConfig: NodeSass.SyncOptions = Object.assign(
         preProcessorsConfig.sassConfig || {},
         {
             data: globalSassData + src,
@@ -87,6 +85,7 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
             indentedSyntax: extention === 'sass',
         }
     );
+
     return String(sass.renderSync(sassConfig).css);
 };
 
