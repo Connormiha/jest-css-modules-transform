@@ -1,0 +1,8 @@
+.class2, .class3 {
+    display: block;
+    color: #fff;
+}
+
+.class3:not(.class1) {
+    color: black
+}
