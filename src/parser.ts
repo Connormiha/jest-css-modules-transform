@@ -52,7 +52,7 @@ export default class Parser {
                     node.selector
                         .split(/[\s,~+>]+/)
                         .forEach((str) => {
-                            const strs = str.match(/[.#][^.#]+/g);
+                            const strs = str.match(/[.#][^.#|)]+/g);
                             if (strs) {
                                 strs.forEach((name) => {
                                     this.pushToResult(
@@ -86,7 +86,6 @@ export default class Parser {
         } else {
             walk(css.root);
         }
-
         return Object.assign(vars, result, resultAnimations);
     }
 }
