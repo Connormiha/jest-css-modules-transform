@@ -1,3 +1,6 @@
+## 4.0.1
+Fix parse pseudo-classes `:not`, `:is`, `:matches`
+
 ## 4.0.0
 Node 8 is no longer supported  
 Add `prepend` property for config.  
