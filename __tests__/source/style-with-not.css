@@ -6,3 +6,7 @@
 .class3:not(.class1) {
     color: black
 }
+
+.class4:not(.class1.class3) {
+    color: black
+}

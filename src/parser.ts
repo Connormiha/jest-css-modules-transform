@@ -50,9 +50,9 @@ export default class Parser {
             if (node.type === 'rule') {
                 if (node.selector) {
                     node.selector
-                        .split(/[\s,~+>]+/)
+                        .split(/[\s,~+>()]+/)
                         .forEach((str) => {
-                            const strs = str.match(/[.#][^.#|)]+/g);
+                            const strs = str.match(/[.#][^.#]+/g);
                             if (strs) {
                                 strs.forEach((name) => {
                                     this.pushToResult(
