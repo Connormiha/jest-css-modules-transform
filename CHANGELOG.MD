@@ -1,3 +1,6 @@
+## 4.0.2
+Update postcss versions dependencies
+
 ## 4.0.1
 Fix parse pseudo-classes `:not`, `:is`, `:matches`
 
