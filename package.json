@@ -66,8 +66,8 @@
   },
   "dependencies": {
     "camelcase": "^6.2.0",
-    "postcss": "^7.0.30",
-    "postcss-nested": "^4.2.1"
+    "postcss": "^7.0.30 || ^8.0.0",
+    "postcss-nested": "^4.2.1 || ^5.0.0"
   },
   "husky": {
     "hooks": {

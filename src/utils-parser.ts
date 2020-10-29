@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-export type IPrependDataFunction = (path: string) => string | string[];
+export type IPrependDataFunction = (filepath: string) => string | string[];
 export type IPrependDataConfig = string | IPrependDataFunction | Array<IPrependDataFunction | string>;
 
 export const extractUrls = (prependConfig: IPrependDataConfig, filepath: string): string[] => {
