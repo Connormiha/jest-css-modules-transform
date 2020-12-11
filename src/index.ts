@@ -74,8 +74,29 @@ const getFileExtension = (path: string): string => {
     return filename.slice(filename.lastIndexOf('.') + 1);
 };
 
+const reguireSassModule = () => {
+    for (const moduleName of ['sass', 'node-sass']) {
+        try {
+            const moduleSass = require(moduleName);
+
+            if (moduleSass) {
+                return moduleSass;
+            }
+        } catch (e) {
+            // pass
+        }
+    }
+
+    return null;
+};
+
 const getSassContent = (src: string, path: string, extention: string, rootDir: string): string => {
-    sass = sass || require('node-sass');
+    sass = sass || reguireSassModule();
+
+    if (!sass) {
+        throw Error('Can\'t find sass or node-sass module');
+    }
+
     globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
 
     const sassConfig: NodeSass.SyncOptions = Object.assign(

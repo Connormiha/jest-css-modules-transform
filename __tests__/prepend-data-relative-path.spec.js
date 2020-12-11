@@ -32,9 +32,9 @@ describe('jest-css-modules', () => {
                 `${cssModuleBasePath}sass`,
                 [
                     '.class',
-                    '  color: green;',
+                    '  color: green',
                     '.class2',
-                    '  color: green;',
+                    '  color: green',
                     '',
                     '@each $item in $may_var',
                     '  .#{$item}',
@@ -48,7 +48,7 @@ describe('jest-css-modules', () => {
                     '$may_var: foo, bar, dar',
                     '$color: #000',
                     '.prepended-class',
-                    '  color: red;',
+                    '  color: red',
                 ].join('\n\r'),
             );
 
