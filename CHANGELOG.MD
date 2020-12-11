@@ -1,3 +1,7 @@
+## 4.1.0
+For `sass/scss` files try to use `sass` module. If not found, then `node-sass`  
+Add optional `sassModuleName` to config.
+
 ## 4.0.2
 Update postcss versions dependencies
 
