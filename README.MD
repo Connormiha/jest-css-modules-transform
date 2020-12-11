@@ -104,6 +104,13 @@ Pass urls for prepend(before file content) to transformed files.
 Useful in a situation where the module uses variables or mixins without explicit import. 
 
 For example you have vars in file, but without implicit import. You can prepend file with `sass` variables before convert module.
+
+#### sassModuleName
+Type: `string`
+Default: `null`
+
+The default nodejs module for `sass/scss` files is `sass`. If not found in node_modules, then `node-sass`. You can define any another module.
+
 ###### Example with array of paths
 ```js
 // file jest-css-modules-transform-config.js
