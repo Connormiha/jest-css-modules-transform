@@ -1,3 +1,8 @@
+import type LazyResult from 'postcss/lib/lazy-result';
+import type Declaration from 'postcss/lib/declaration';
+import type {ChildNode} from 'postcss/lib/node';
+import type Root from 'postcss/lib/root';
+import type Rule from 'postcss/lib/rule';
 import postcss from 'postcss';
 import camelCase from 'camelcase';
 const dashesCamelCase = (str: string): string => str.replace(/-+(\w)/g, (match, firstLetter) => firstLetter.toUpperCase());
@@ -37,12 +42,12 @@ export default class Parser {
         }
     }
 
-    getCSSSelectors(css: string | postcss.LazyResult): Record<string, string> {
+    getCSSSelectors(css: string | LazyResult): Record<string, string> {
         const vars: Record<string, string> = {};
         const result: Record<string, string> = {};
         const resultAnimations: Record<string, string> = {};
 
-        const walk = (node: postcss.ChildNode | postcss.Root | postcss.Declaration): void => {
+        const walk = (node: ChildNode | Root | Declaration): void => {
             if (!node) {
                 return;
             }
@@ -71,7 +76,7 @@ export default class Parser {
                     this.pushToResult(resultAnimations, node.params);
                 }
             } else if (node.type === 'decl') {
-                if (node.prop && node.parent && (node.parent as postcss.Rule).selector === ':export') {
+                if (node.prop && node.parent && (node.parent as Rule).selector === ':export') {
                     vars[node.prop] = node.value;
                 }
             }

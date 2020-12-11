@@ -4,6 +4,7 @@ import {
     ExecSyncOptionsWithStringEncoding,
 } from 'child_process';
 import postcss from 'postcss';
+import type LazyResult from 'postcss/lib/lazy-result';
 import Parser from './parser';
 import {
     createFileCache,
@@ -107,7 +108,7 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
         preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(configPath);
         parser = parser || new Parser(preProcessorsConfig.cssLoaderConfig);
         const extention = getFileExtension(path);
-        let textCSS: string | postcss.LazyResult = '';
+        let textCSS: string | LazyResult = '';
         let prependDataContent = '';
         let stylusConfig: Record<string, string | boolean | number>;
 
