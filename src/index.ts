@@ -75,7 +75,11 @@ const getFileExtension = (path: string): string => {
 };
 
 const reguireSassModule = () => {
-    for (const moduleName of ['sass', 'node-sass']) {
+    for (const moduleName of [preProcessorsConfig.sassModuleName, 'sass', 'node-sass']) {
+        if (!moduleName) {
+            continue;
+        }
+
         try {
             const moduleSass = require(moduleName);
 

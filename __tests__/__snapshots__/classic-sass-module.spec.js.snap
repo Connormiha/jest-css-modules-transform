@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest-css-modules prependData should have correct object params sass 1`] = `
+Array [
+  "class1",
+  "class2",
+  "class3",
+  "id",
+  "id2",
+  "sunrise",
+]
+`;
+
+exports[`jest-css-modules prependData should have correct object params scss 1`] = `
+Array [
+  "class1",
+  "class2",
+  "class3",
+  "id",
+  "id2",
+  "sunrise",
+]
+`;

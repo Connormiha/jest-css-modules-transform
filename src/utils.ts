@@ -14,6 +14,7 @@ export interface IPreProcessorsConfig {
     cssLoaderConfig: ICSSLoaderConfig;
     sassConfig: Partial<SyncOptions>;
     lessConfig: Partial<Less.Options>;
+    sassModuleName: string;
     stylusConfig: Record<string, string | boolean | number>;
     postcssConfig?: IPostcssOptions;
     prepend?: IPrependDataConfig;
@@ -25,6 +26,7 @@ export const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPr
         lessConfig: {},
         stylusConfig: {},
         cssLoaderConfig: {},
+        sassModuleName: '',
     };
 
     return (configPath: string): IPreProcessorsConfig => {
