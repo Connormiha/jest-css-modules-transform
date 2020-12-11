@@ -10,6 +10,10 @@ jest-with-sassrc.js
 jest-with-camel-case.js
 jest-with-camel-case-only.js
 jest-with-dashes.js
+jest-classic-sass-module.js
+jest-prepend-data-relative-path.js
+jest-prepend-data.js
+jest.config.js
 tsconfig.json
 test.js
 __tests__
