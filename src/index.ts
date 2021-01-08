@@ -201,7 +201,18 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
                 break;
         }
 
-        return moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS)));
+        const moduleCode = moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS)));
+
+        if (preProcessorsConfig.injectIntoDOM) {
+            return `
+            const style = document.createElement('style');
+            style.styleSheet.cssText = '${textCSS}';
+            document.head.appendChild(style);
+            ${moduleCode}
+            `;
+        }
+
+        return moduleCode;
     },
 };
 

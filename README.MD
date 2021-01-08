@@ -105,6 +105,14 @@ Useful in a situation where the module uses variables or mixins without explicit
 
 For example you have vars in file, but without implicit import. You can prepend file with `sass` variables before convert module.
 
+#### injectIntoDOM
+Type: `boolean`
+Default: `false`
+
+Inject the generated CSS into the head of the document.
+
+This option could be useful for visual regression testing, where the output dom has the styles applied to it.
+
 #### sassModuleName
 Type: `string`
 Default: `null`

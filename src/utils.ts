@@ -18,6 +18,7 @@ export interface IPreProcessorsConfig {
     stylusConfig: Record<string, string | boolean | number>;
     postcssConfig?: IPostcssOptions;
     prepend?: IPrependDataConfig;
+    injectIntoDOM?: boolean
 }
 
 export const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPreProcessorsConfig {
@@ -27,6 +28,7 @@ export const getPreProcessorsConfig = (function wrap(): (rootDit: string) => IPr
         stylusConfig: {},
         cssLoaderConfig: {},
         sassModuleName: '',
+        injectIntoDOM: false,
     };
 
     return (configPath: string): IPreProcessorsConfig => {
