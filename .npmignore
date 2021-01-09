@@ -2,6 +2,7 @@
 .babelrc
 .travis.yml
 .eslintrc.yml
+.eslintrc.js
 jest.json
 package-lock.json
 jest.config.ts
@@ -13,6 +14,7 @@ jest-with-dashes.js
 jest-classic-sass-module.js
 jest-prepend-data-relative-path.js
 jest-prepend-data.js
+jest-with-inject-styles.js
 jest.config.js
 tsconfig.json
 test.js
