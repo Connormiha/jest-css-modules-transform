@@ -1,3 +1,6 @@
+## 4.2.0
+Added `injectIntoDOM` option to inject css into DOM/JSDOM. This can be useful if you check the `getComputedStyle` in tests.
+
 ## 4.1.0
 For `sass/scss` files try to use `sass` module. If not found, then `node-sass`  
 Add optional `sassModuleName` to config.
