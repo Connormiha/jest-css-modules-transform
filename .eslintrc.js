@@ -2,57 +2,57 @@ module.exports = {
     extends: [
       'eslint:all',
       'plugin:@typescript-eslint/eslint-recommended',
-      'plugin:@typescript-eslint/recommended'
+      'plugin:@typescript-eslint/recommended',
     ],
     parser: '@typescript-eslint/parser',
     plugins: [
       'jest',
-      '@typescript-eslint'
+      '@typescript-eslint',
     ],
     overrides: [
       {
         files: [
-          '__tests__/**/*.spec.js'
+          '__tests__/**/*.spec.js',
         ],
         env: {
-          jest: true
-        }
+          jest: true,
+        },
       },
       {
         files: [
-          'src/**/*.ts'
-        ]
-      }
+          'src/**/*.ts',
+        ],
+      },
     ],
     env: {
       es6: true,
-      node: true
+      node: true,
     },
     parserOptions: {
-      sourceType: 'module'
+      sourceType: 'module',
     },
     rules: {
       '@typescript-eslint/naming-convention': ['error', {
         selector: 'interface',
-        format: ["PascalCase"],
-        custom: { regex: "^I[A-Z]", match: true }
+        format: ['PascalCase'],
+        custom: { regex: '^I[A-Z]', match: true },
       }],
       '@typescript-eslint/no-var-requires': 'off',
       quotes: [
         'error',
-        'single'
+        'single',
       ],
       'space-before-function-paren': [
         'error',
-        'never'
+        'never',
       ],
       'padded-blocks': [
         'error',
-        'never'
+        'never',
       ],
       'quote-props': [
         'error',
-        'as-needed'
+        'as-needed',
       ],
       complexity: 'off',
       'sort-imports': 'off',
@@ -91,26 +91,26 @@ module.exports = {
       'require-unicode-regexp': 'off',
       'max-params': [
         'error',
-        5
+        5,
       ],
       'one-var': [
         'error',
-        'never'
+        'never',
       ],
       indent: [
         'error',
         4,
         {
-          SwitchCase: 1
+          SwitchCase: 1,
         }
       ],
       'comma-dangle': [
         'error',
-        'always-multiline'
+        'always-multiline',
       ],
       'max-len': [
         'error',
-        140
-      ]
-    }
-  };
+        140,
+      ],
+    },
+};

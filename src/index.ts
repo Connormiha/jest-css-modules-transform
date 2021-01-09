@@ -29,8 +29,6 @@ let stylus: typeof Stylus;
 let sass: typeof NodeSass;
 
 const moduleTemplate = `
-    "use strict";
-
     const data = %s;
 
     if (typeof module === 'object' && module) {
@@ -55,7 +53,13 @@ const moduleTemplate = `
         });
         exports.default = data;
     }
-`;
+`.trim().replace(/^\s{4}/g, '');
+
+const injectCssTemplate = `
+    const style = document.createElement('style');
+    style.innerHTML = \`%s\`;
+    document.head.appendChild(style);
+`.trim().replace(/^\s{4}/g, '');
 
 let preProcessorsConfig: IPreProcessorsConfig;
 
@@ -204,12 +208,13 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
         const moduleCode = moduleTemplate.replace('%s', JSON.stringify(parser.getCSSSelectors(textCSS)));
 
         if (preProcessorsConfig.injectIntoDOM) {
-            return `
-            const style = document.createElement('style');
-            style.styleSheet.cssText = '${textCSS}';
-            document.head.appendChild(style);
-            ${moduleCode}
-            `;
+            const textCssString = typeof textCSS === 'string' ? textCSS : textCSS.toString();
+            const textCssEscaped = textCssString.replace(/`/g, '\\`');
+
+            return [
+                injectCssTemplate.replace('%s', textCssEscaped),
+                moduleCode,
+            ].join('\n');
         }
 
         return moduleCode;

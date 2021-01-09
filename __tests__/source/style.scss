@@ -50,6 +50,10 @@
 
 #id, #id2{
     display: block;
+
+    &::after {
+        content: '`test`';
+    }
 }
 
 input {

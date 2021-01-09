@@ -34,8 +34,8 @@
     "lint": "eslint src --ext ts",
     "prepare": "npm run lint && npm test",
     "test": "node test.js",
-    "test:unix": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only && npm run test:prepend-data && npm run test:prepend-data-relative && npm run test:classic-sass-module",
-    "test:windows": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:prepend-data && npm run test:prepend-data-relative && npm run test:classic-sass-module",
+    "test:unix": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:camel-case-only && npm run test:prepend-data && npm run test:prepend-data-relative && npm run test:classic-sass-module && npm run test:inject-styles",
+    "test:windows": "npm run build && npm run test:base && npm run test:config && npm run test:sassrc && npm run test:camel-case && npm run test:dashes && npm run test:prepend-data && npm run test:prepend-data-relative && npm run test:classic-sass-module && npm run test:inject-styles",
     "test:base": "jest --no-cache ",
     "test:config": "jest --no-cache --config jest-with-css-config.js",
     "test:sassrc": "jest --no-cache --config jest-with-sassrc.js",
@@ -43,6 +43,7 @@
     "test:camel-case-only": "JEST_CSS_MODULES_TRANSFORM_CONFIG=other-config.js jest --no-cache --config jest-with-camel-case-only.js",
     "test:classic-sass-module": "jest --no-cache --config jest-classic-sass-module.js",
     "test:dashes": "jest --no-cache --config jest-with-dashes.js",
+    "test:inject-styles": "jest --no-cache --config jest-with-inject-styles.js",
     "test:prepend-data": "jest --no-cache --config jest-prepend-data.js",
     "test:prepend-data-relative": "jest --no-cache --config jest-prepend-data-relative-path.js"
   },

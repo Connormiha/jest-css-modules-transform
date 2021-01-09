@@ -10,6 +10,7 @@ module.exports = {
         '/__tests__/prepend-data\\.spec\\.js$',
         '/__tests__/prepend-data-relative-path\\.spec\\.js$',
         '/__tests__/classic-sass-module\\.spec\\.js$',
+        '/__tests__/config-with-inject-styles\\.spec\\.js$',
     ],
     transform: {
         '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/dist/index.js',

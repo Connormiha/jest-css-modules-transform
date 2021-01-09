@@ -53,5 +53,8 @@ describe('jest-css-modules', () => {
         expect(typeof cssFile).toBe('object');
         expect(cssFile).toBeInstanceOf(Object);
         expect(Object.keys(cssFile)).toMatchSnapshot();
+
+        // eslint-disable-next-line no-undef
+        expect(document.head.querySelector('style')).toBeFalsy();
     });
 });
