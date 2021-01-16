@@ -1,5 +1,5 @@
 module.exports = {
-    data: `
+  data: `
 $sassrc_width: '10px'
 
 =foo

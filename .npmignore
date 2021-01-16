@@ -1,3 +1,5 @@
+.editorconfig
+.prettierrc
 .gitignore
 .babelrc
 .travis.yml
