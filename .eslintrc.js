@@ -4,9 +4,10 @@ module.exports = {
     'prettier',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:node/recommended',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['jest', '@typescript-eslint', 'prettier'],
+  plugins: ['jest', '@typescript-eslint', 'node', 'prettier'],
   overrides: [
     {
       files: ['__tests__/**/*.spec.js'],
@@ -24,6 +25,7 @@ module.exports = {
   },
   parserOptions: {
     sourceType: 'module',
+    ecmaVersion: 2020,
   },
   rules: {
     '@typescript-eslint/naming-convention': [
@@ -35,6 +37,9 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-var-requires': 'off',
+    'node/no-unsupported-features/es-syntax': 'off',
+    'node/no-missing-import': 'off',
+    'node/no-path-concat': 'error',
     quotes: ['error', 'single'],
     'space-before-function-paren': ['error', 'never'],
     'padded-blocks': ['error', 'never'],
