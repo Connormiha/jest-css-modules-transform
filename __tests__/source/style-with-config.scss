@@ -50,7 +50,11 @@
 }
 
 #id, #id2{
-    display: block;
+  display: block;
+}
+
+#id {
+  content: '\20';
 }
 
 input {
