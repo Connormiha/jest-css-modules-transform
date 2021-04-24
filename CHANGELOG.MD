@@ -1,3 +1,6 @@
+## 4.2.1
+Fixed edge cases with `injectIntoDOM` and scpecial characters.
+
 ## 4.2.0
 Added `injectIntoDOM` option to inject css into DOM/JSDOM. This can be useful if you check the `getComputedStyle` in tests.
 
