@@ -48,6 +48,10 @@
     display: block;
 }
 
+#id2::after {
+  content: '\20';
+}
+
 input {
     display: block;
     opacity: 0.5;
@@ -62,3 +66,8 @@ input {
 .super_hidden_class2 {
     display: block;
 }*/
+
+/*
+`${lost}`
+
+*/

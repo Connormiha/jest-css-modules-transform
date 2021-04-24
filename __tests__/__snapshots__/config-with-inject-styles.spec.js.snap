@@ -1,5 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`jest-css-modules inject styles should have correct object params css 1`] = `
+Array [
+  "red",
+  "type",
+  "class1",
+  "class2",
+  "class3",
+  "id",
+  "id2",
+  "sunrise",
+]
+`;
+
+exports[`jest-css-modules inject styles should have correct object params css 2`] = `
+<style>
+  /** /**
+.super_hidden_class {
+    display: block;
+}
+ */
+
+ /**/
+
+@keyframes sunrise {
+    0% {
+        bottom: 0;
+        left: 340px;
+        background: #f00;
+    }
+
+    33% {
+        bottom: 340px;
+        left: 340px;
+        background: #ffd630;
+    }
+
+    66% {
+        bottom: 340px;/** .hiddenclass15:before{content:".hiddenclass20{display: block}"} /** {}dd*/
+        left: 40px;
+        background: #ffd630;
+    }
+
+    100% {
+        bottom: 0;
+        left: 40px;
+        background: #f00;
+    }
+
+}
+
+.class1 {
+    display: block;
+    content: ".hiddenclass{display: block;}";
+    color: #cdd;
+}
+
+.class2, .class3 {
+    display: block;
+    color: #fff;
+}
+
+#id, #id2{
+    display: block;
+}
+
+#id2::after {
+  content: '\\20';
+}
+
+input {
+    display: block;
+    opacity: 0.5;
+}
+
+:export {
+    red: #db2b21;
+    type: "global";
+}
+
+/*
+.super_hidden_class2 {
+    display: block;
+}*/
+
+/*
+\`\${lost}\`
+
+*/
+
+</style>
+`;
+
 exports[`jest-css-modules inject styles should have correct object params scss 1`] = `
 Array [
   "class1",
@@ -53,6 +145,9 @@ exports[`jest-css-modules inject styles should have correct object params scss 2
 .class2, .class3 {
   display: block;
   color: #fff;
+}
+.class2::after, .class3::after {
+  content: " ";
 }
 
 #id, #id2 {

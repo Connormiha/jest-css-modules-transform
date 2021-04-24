@@ -211,7 +211,10 @@ const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
 
     if (preProcessorsConfig.injectIntoDOM) {
       const textCssString = typeof textCSS === 'string' ? textCSS : textCSS.toString();
-      const textCssEscaped = textCssString.replace(/`/g, '\\`');
+      const textCssEscaped = textCssString
+        .replace(/`/g, '\\`')
+        .replace(/\\(\d)/g, '\\\\$1')
+        .replace(/\$\{/g, '\\${');
 
       return [injectCssTemplate.replace('%s', textCssEscaped), moduleCode].join('\n');
     }

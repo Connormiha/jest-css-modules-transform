@@ -46,6 +46,10 @@
 .class2, .class3 {
     display: block;
     color: #fff;
+
+    &::after {
+      content: '\20';
+  }
 }
 
 #id, #id2{
