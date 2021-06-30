@@ -16,6 +16,7 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/dist/index.js',
     '.+\\.ts$': '<rootDir>/__tests__/preprocessor-typescript.js',
   },
+  testEnvironment: 'jsdom',
   bail: true,
   collectCoverageFrom: ['src/**/*.js'],
   moduleDirectories: ['node_modules', 'src'],

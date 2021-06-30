@@ -5,4 +5,5 @@ module.exports = {
   },
   bail: true,
   collectCoverageFrom: ['src/index.js'],
+  testEnvironment: 'jsdom',
 };

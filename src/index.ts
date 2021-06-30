@@ -8,6 +8,8 @@ import postcssNestedModule from 'postcss-nested';
 import type Stylus from 'stylus';
 import type NodeSass from 'node-sass';
 import type { Transformer } from '@jest/transform';
+// eslint-disable-next-line node/no-extraneous-import
+import type { Config } from '@jest/types';
 import { getPreProcessorsConfig, IPreProcessorsConfig, requirePostcssConfig } from './utils';
 
 const CONFIG_PATH =
@@ -97,7 +99,7 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
   sass = sass || reguireSassModule();
 
   if (!sass) {
-    throw Error("Can't find sass or node-sass module");
+    throw Error('Can\'t find sass or node-sass module');
   }
 
   globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
@@ -122,9 +124,11 @@ const nodeExecOptions: ExecSyncOptionsWithStringEncoding = {
 };
 let getFileData;
 
-const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
-  process(src, path, config) {
-    config = (config as any).config || config; // jest@27 nests the config in an options object
+const moduleTransform: Transformer = {
+  process(src, path, transformConfig) {
+    // Jest 27+ and Jesy 26 has different transformConfig
+    const config: Config.ProjectConfig = transformConfig.config || (transformConfig as unknown as Config.ProjectConfig);
+
     getFileData = getFileData || createFileCache(config.cwd);
     configPath = configPath || resolve(config.rootDir, CONFIG_PATH);
     preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(configPath);
