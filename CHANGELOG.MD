@@ -1,3 +1,6 @@
+## 4.3.0
+Add Jest 27 support
+
 ## 4.2.1
 Fixed edge cases with `injectIntoDOM` and scpecial characters.
 
