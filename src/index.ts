@@ -97,7 +97,7 @@ const getSassContent = (src: string, path: string, extention: string, rootDir: s
   sass = sass || reguireSassModule();
 
   if (!sass) {
-    throw Error('Can\'t find sass or node-sass module');
+    throw Error("Can't find sass or node-sass module");
   }
 
   globalSassData = globalSassData === undefined ? getGlobalSassData(rootDir) : globalSassData;
@@ -124,6 +124,7 @@ let getFileData;
 
 const moduleTransform: Omit<Transformer, 'getCacheKey'> = {
   process(src, path, config) {
+    config = (config as any).config || config; // jest@27 nests the config in an options object
     getFileData = getFileData || createFileCache(config.cwd);
     configPath = configPath || resolve(config.rootDir, CONFIG_PATH);
     preProcessorsConfig = preProcessorsConfig || getPreProcessorsConfig(configPath);
