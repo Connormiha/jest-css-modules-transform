@@ -53,7 +53,7 @@
     "@jest/types": "27.4.2",
     "@types/jest": "27.4.0",
     "@types/less": "3.0.3",
-    "@types/node": "17.0.10",
+    "@types/node": "17.0.12",
     "@types/node-sass": "4.11.2",
     "@types/postcss-nested": "4.2.3",
     "@types/stylus": "0.48.36",
