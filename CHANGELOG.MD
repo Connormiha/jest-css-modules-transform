@@ -1,3 +1,6 @@
+## 4.4.0
+Add Jest 28 support
+
 ## 4.3.0
 Add Jest 27 support
 
