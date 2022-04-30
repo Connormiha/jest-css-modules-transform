@@ -1,5 +1,6 @@
 import { sep as pathSep, resolve } from 'path';
 import { execSync, ExecSyncOptionsWithStringEncoding } from 'child_process';
+import { getVersion } from 'jest';
 import postcss from 'postcss';
 import type LazyResult from 'postcss/lib/lazy-result';
 import Parser from './parser';
@@ -222,6 +223,12 @@ const moduleTransform: Transformer = {
         .replace(/\$\{/g, '\\${');
 
       return [injectCssTemplate.replace('%s', textCssEscaped), moduleCode].join('\n');
+    }
+
+    if (parseInt(getVersion(), 10) > 27) {
+      return {
+        code: moduleCode,
+      };
     }
 
     return moduleCode;
