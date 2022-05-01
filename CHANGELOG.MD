@@ -1,3 +1,6 @@
+## 4.4.1
+Fix Jest 28 with injectIntoDOM
+
 ## 4.4.0
 Add Jest 28 support
 
