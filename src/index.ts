@@ -241,7 +241,8 @@ const moduleTransform: Transformer = {
       };
     }
 
-    return moduleCode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return moduleCode as any;
   },
 };
 

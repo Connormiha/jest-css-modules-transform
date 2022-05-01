@@ -75,6 +75,7 @@ module.exports = {
     'require-jsdoc': 'off',
     'prefer-named-capture-group': 'off',
     'no-prototype-builtins': 'off',
+    'no-constant-binary-expression': 'off',
     'no-continue': 'off',
     'no-undefined': 'off',
     'no-underscore-dangle': 'off',
