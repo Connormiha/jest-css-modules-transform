@@ -1,3 +1,6 @@
+## 4.4.2
+Add support for camelCase var name for post css `:export`
+
 ## 4.4.1
 Fix Jest 28 with injectIntoDOM
 
