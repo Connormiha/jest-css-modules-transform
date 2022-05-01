@@ -4,6 +4,8 @@ exports[`jest-css-modules prependData should have correct object params css 1`] 
 Array [
   "red",
   "type",
+  "page-margin",
+  "pageMargin",
   "prepended-class",
   "class1",
   "class2",

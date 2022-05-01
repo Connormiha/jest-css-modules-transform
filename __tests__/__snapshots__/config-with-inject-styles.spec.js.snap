@@ -4,6 +4,8 @@ exports[`jest-css-modules inject styles should have correct object params css 1`
 Array [
   "red",
   "type",
+  "page-margin",
+  "pageMargin",
   "class1",
   "class2",
   "class3",
@@ -77,6 +79,7 @@ input {
 :export {
     red: #db2b21;
     type: "global";
+    page-margin: 16px;
 }
 
 /*
