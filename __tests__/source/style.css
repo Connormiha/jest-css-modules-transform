@@ -60,6 +60,7 @@ input {
 :export {
     red: #db2b21;
     type: "global";
+    page-margin: 16px;
 }
 
 /*

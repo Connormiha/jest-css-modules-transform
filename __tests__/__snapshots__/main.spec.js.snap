@@ -4,6 +4,8 @@ exports[`jest-css-modules should have correct object params 1`] = `
 Array [
   "red",
   "type",
+  "page-margin",
+  "pageMargin",
   "class1",
   "class2",
   "class3",
@@ -20,6 +22,8 @@ Object {
   "class3": "class3",
   "id": "id",
   "id2": "id2",
+  "page-margin": "16px",
+  "pageMargin": "16px",
   "red": "#db2b21",
   "sunrise": "sunrise",
   "type": "\\"global\\"",

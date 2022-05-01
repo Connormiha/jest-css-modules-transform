@@ -71,6 +71,12 @@ export default class Parser {
       } else if (node.type === 'decl') {
         if (node.prop && node.parent && (node.parent as Rule).selector === ':export') {
           vars[node.prop] = node.value;
+
+          const camelCaseKey = camelCase(node.prop);
+
+          if (!(camelCaseKey in vars)) {
+            vars[camelCaseKey] = node.value;
+          }
         }
       }
 
