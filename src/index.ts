@@ -215,6 +215,8 @@ const moduleTransform: Transformer = {
       JSON.stringify(parser.getCSSSelectors(textCSS)),
     );
 
+    const isGreaterThan27 = parseInt(getVersion(), 10) > 27;
+
     if (preProcessorsConfig.injectIntoDOM) {
       const textCssString = typeof textCSS === 'string' ? textCSS : textCSS.toString();
       const textCssEscaped = textCssString
@@ -222,10 +224,18 @@ const moduleTransform: Transformer = {
         .replace(/\\(\d)/g, '\\\\$1')
         .replace(/\$\{/g, '\\${');
 
-      return [injectCssTemplate.replace('%s', textCssEscaped), moduleCode].join('\n');
+      const code = [injectCssTemplate.replace('%s', textCssEscaped), moduleCode].join('\n');
+
+      if (isGreaterThan27) {
+        return {
+          code,
+        };
+      }
+
+      return code;
     }
 
-    if (parseInt(getVersion(), 10) > 27) {
+    if (isGreaterThan27) {
       return {
         code: moduleCode,
       };
